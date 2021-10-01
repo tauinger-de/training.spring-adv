@@ -1,14 +1,13 @@
-package com.example.demo;
+package com.example.pizza;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
+public class PizzaApplication {
 
     public static void main(String[] args) {
-        System.out.println("Los geht's!");
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(PizzaApplication.class, args);
     }
 
 }
