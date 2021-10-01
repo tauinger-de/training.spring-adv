@@ -1,0 +1,20 @@
+package com.example.pizza.customer;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
+
+@SpringBootTest
+@TestPropertySource(properties = {"app.setup.customers = false"})
+public class CustomerSetupTest {
+
+    @Autowired
+    CustomerService customerService;
+
+    @Test
+    public void noCustomersExist() {
+        Assertions.assertFalse(customerService.getAllCustomers().iterator().hasNext());
+    }
+}

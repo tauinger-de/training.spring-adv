@@ -1,11 +1,13 @@
 package com.example.pizza.customer;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;
 
 @Component
+@ConditionalOnProperty(prefix = "app.setup", name = "customers", havingValue = "true")
 public class CustomerSetup {
 
     private CustomerService customerService;

@@ -3,11 +3,13 @@ package com.example.pizza.order;
 import com.example.pizza.customer.Customer;
 import com.example.pizza.customer.CustomerService;
 import com.example.pizza.product.ProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -17,9 +19,12 @@ public class OrderService {
     // fields
     //
 
-    Integer deliveryTimeInMinutes = 30;
+    // use kebab-case!
+    @Value("${app.delivery-time-in-minutes}")
+    Integer deliveryTimeInMinutes;
 
-    Map<String, Double> dailyDiscounts = new HashMap<>();
+    @Value("#{${app.daily-discounts}}")
+    Map<String, Double> dailyDiscounts;
 
     //
     // injected beans
@@ -28,15 +33,18 @@ public class OrderService {
     private CustomerService customerService;
     private ProductService productService;
     private OrderRepository orderRepository;
+    private String greeting;
 
     //
     // constructors and setup
     //
 
-    public OrderService(CustomerService customerService, ProductService productService, OrderRepository orderRepository) {
+    public OrderService(CustomerService customerService, ProductService productService, OrderRepository orderRepository,
+                        @Qualifier("greeting") String greeting) {
         this.customerService = customerService;
         this.productService = productService;
         this.orderRepository = orderRepository;
+        this.greeting = greeting;
     }
 
     //
@@ -44,6 +52,9 @@ public class OrderService {
     //
 
     public Order placeOrder(String phoneNumber, Map<String, Integer> productQuantities) {
+        // greet
+        if (StringUtils.hasText(this.greeting)) System.out.println(this.greeting);
+
         // make sure customer exists -- throws exception if doesn't
         Customer customer = this.customerService.getCustomerByPhoneNumber(phoneNumber);
 
