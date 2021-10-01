@@ -1,7 +1,6 @@
 package com.example.pizza.product;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +16,6 @@ class ProductServiceTest {
     Double productPrice = 1.23;
 
     @Test
-    @Disabled
     void createProduct_failsForDuplicateProductId() {
         // first call creates product
         productService.createProduct(new Product(productId, productName, productPrice));

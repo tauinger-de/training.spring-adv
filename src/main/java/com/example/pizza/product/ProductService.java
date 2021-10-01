@@ -8,10 +8,17 @@ import java.util.Map;
 public class ProductService {
 
     //
+    // injected beans
+    //
+
+    private ProductRepository productRepository;
+
+    //
     // constructors and setup
     //
 
-    public ProductService() {
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
     //
@@ -19,22 +26,30 @@ public class ProductService {
     //
 
     public Iterable<Product> getAllProducts() {
-        // TODO
-        return null;
+        return this.productRepository.findAll();
     }
 
     public Product getProduct(String productId) {
-        // TODO
-        throw new ProductNotFoundException("For productId `" + productId + "`");
+        return this.productRepository
+                .findById(productId)
+                .orElseThrow(() -> new ProductNotFoundException("For productId `" + productId + "`"));
     }
 
     public Double getTotalPrice(Map<String, Integer> productQuantities) {
-        // TODO
-        return null;
+        // loop over each map entry (which is productId -> quantity) and map each entry to the product's price
+        // multiplied by desired quantity. Then sum all up and that is our total.
+        return productQuantities.entrySet().stream()
+                .mapToDouble(entry -> {
+                    Product product = getProduct(entry.getKey());
+                    return product.price * entry.getValue();
+                })
+                .sum();
     }
 
     public Product createProduct(Product product) {
-        // TODO
-        return null;
+        if (this.productRepository.existsById(product.productId)) {
+            throw new IllegalStateException("Persistence already contains a product with id: " + product.productId);
+        }
+        return this.productRepository.save(product);
     }
 }
