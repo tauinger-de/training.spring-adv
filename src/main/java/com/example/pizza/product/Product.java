@@ -1,7 +1,12 @@
 package com.example.pizza.product;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Product {
 
+    @Id
     String productId;
 
     String name;

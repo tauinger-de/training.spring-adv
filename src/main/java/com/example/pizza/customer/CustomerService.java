@@ -7,10 +7,17 @@ import org.springframework.stereotype.Service;
 public class CustomerService {
 
     //
+    // injected beans
+    //
+
+    private CustomerRepository repository;
+
+    //
     // constructors and setup
     //
 
-    public CustomerService() {
+    public CustomerService(CustomerRepository repository) {
+        this.repository = repository;
     }
 
     //
@@ -19,20 +26,19 @@ public class CustomerService {
 
     @NonNull
     public Customer getCustomerByPhoneNumber(String phoneNumber) {
-        // TODO
-        throw new CustomerNotFoundException("For phoneNumber `" + phoneNumber + "`");
+        return this.repository
+                .findByPhoneNumber(phoneNumber)
+                .orElseThrow(() -> new CustomerNotFoundException("For phoneNumber `" + phoneNumber + "`"));
     }
 
     @NonNull
     public Iterable<Customer> getAllCustomers() {
-        // TODO
-        return null;
+        return this.repository.findAll();
     }
 
     @NonNull
     public Customer createCustomer(Customer customer) {
-        // TODO
-        return null;
+        return this.repository.save(customer);
     }
 
 }

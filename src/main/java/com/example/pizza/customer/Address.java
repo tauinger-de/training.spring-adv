@@ -1,5 +1,8 @@
 package com.example.pizza.customer;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Address {
 
     private String street;

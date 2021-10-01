@@ -27,14 +27,16 @@ public class OrderService {
 
     private CustomerService customerService;
     private ProductService productService;
+    private OrderRepository orderRepository;
 
     //
     // constructors and setup
     //
 
-    public OrderService(CustomerService customerService, ProductService productService) {
+    public OrderService(CustomerService customerService, ProductService productService, OrderRepository orderRepository) {
         this.customerService = customerService;
         this.productService = productService;
+        this.orderRepository = orderRepository;
     }
 
     //
@@ -62,12 +64,10 @@ public class OrderService {
                 LocalDateTime.now().plusMinutes(this.deliveryTimeInMinutes));
 
         // persist and return it
-        // TODO
-        return null;
+        return this.orderRepository.save(order);
     }
 
     public Iterable<Order> getOrders() {
-        // TODO
-        return null;
+        return this.orderRepository.findAll();
     }
 }

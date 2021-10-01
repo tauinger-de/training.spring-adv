@@ -2,16 +2,22 @@ package com.example.pizza.order;
 
 import com.example.pizza.customer.Customer;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "ORDERS") // just "order" is a reserved sql word!
 public class Order {
 
     //
     // --- fields ---
     //
 
+    @Id
+    @GeneratedValue
     Long id;
 
+    @ManyToOne
     Customer customer;
 
     Double totalPrice;
