@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,10 +21,11 @@ public class OrderService {
     // fields
     //
 
-    @Value("${app.deliveryTimeInMinutes}")
+    // use kebab-case!
+    @Value("${app.delivery-time-in-minutes}")
     Integer deliveryTimeInMinutes;
 
-    @Value("#{${app.dailyDiscounts}}")
+    @Value("#{${app.daily-discounts}}")
     Map<String, Double> dailyDiscounts;
 
     //
@@ -57,7 +59,7 @@ public class OrderService {
     @Transactional(propagation = Propagation.REQUIRED)
     public Order placeOrder(String phoneNumber, Map<String, Integer> productQuantities) {
         // greet
-        System.out.println(this.greeting);
+        if (StringUtils.hasText(this.greeting)) System.out.println(this.greeting);
 
         // make sure customer exists -- throws exception if doesn't
         Customer customer = this.customerService.getCustomerByPhoneNumber(phoneNumber);
