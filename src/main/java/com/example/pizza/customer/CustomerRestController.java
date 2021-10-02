@@ -19,7 +19,7 @@ public class CustomerRestController {
     // --- injected beans ---
     //
 
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     //
     // --- constructors and setup ---
