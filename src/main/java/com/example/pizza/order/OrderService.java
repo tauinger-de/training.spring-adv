@@ -6,7 +6,8 @@ import com.example.pizza.product.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,11 +20,10 @@ public class OrderService {
     // fields
     //
 
-    // use kebab-case!
-    @Value("${app.delivery-time-in-minutes}")
+    @Value("${app.deliveryTimeInMinutes}")
     Integer deliveryTimeInMinutes;
 
-    @Value("#{${app.daily-discounts}}")
+    @Value("#{${app.dailyDiscounts}}")
     Map<String, Double> dailyDiscounts;
 
     //
@@ -51,12 +51,16 @@ public class OrderService {
     // business logic
     //
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public Order placeOrder(String phoneNumber, Map<String, Integer> productQuantities) {
         // greet
-        if (StringUtils.hasText(this.greeting)) System.out.println(this.greeting);
+        System.out.println(this.greeting);
 
         // make sure customer exists -- throws exception if doesn't
         Customer customer = this.customerService.getCustomerByPhoneNumber(phoneNumber);
+
+        // increase
+        this.customerService.increaseOrderCount(customer.getId());
 
         // calculate total price
         Double totalPrice = this.productService.getTotalPrice(productQuantities);

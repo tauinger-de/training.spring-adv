@@ -19,6 +19,8 @@ public class Customer {
 
     private String phoneNumber;
 
+    private Integer orderCount = 0;
+
     public Customer() {
     }
 
@@ -26,6 +28,10 @@ public class Customer {
         this.fullName = fullName;
         this.address = address;
         this.phoneNumber = phoneNumber;
+    }
+
+    public int increaseOrderCount() {
+        return this.orderCount++;
     }
 
     public Long getId() {
@@ -44,6 +50,10 @@ public class Customer {
         return address;
     }
 
+    public Integer getOrderCount() {
+        return orderCount;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -51,6 +61,7 @@ public class Customer {
                 ", fullName='" + fullName + '\'' +
                 ", address=" + address +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", orderCount=" + orderCount +
                 '}';
     }
 }

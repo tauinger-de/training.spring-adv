@@ -2,6 +2,10 @@ package com.example.pizza.customer;
 
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -39,6 +43,15 @@ public class CustomerService {
     @NonNull
     public Customer createCustomer(Customer customer) {
         return this.repository.save(customer);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void increaseOrderCount(long customerId) {
+        // obtain entity of customer valid for the new transaction that was started for this method
+        Optional<Customer> customerFromThisTrx = this.repository.findById(customerId);
+
+        // customer might not yet be visible to this transaction in case it just has been created
+        customerFromThisTrx.ifPresent(Customer::increaseOrderCount);
     }
 
 }
