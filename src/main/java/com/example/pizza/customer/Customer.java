@@ -8,6 +8,10 @@ import javax.persistence.Id;
 @Entity
 public class Customer {
 
+    //
+    // --- fields ---
+    //
+
     @Id
     @GeneratedValue
     private Long id;
@@ -21,6 +25,10 @@ public class Customer {
 
     private Integer orderCount = 0;
 
+    //
+    // --- constructors ---
+    //
+
     public Customer() {
     }
 
@@ -29,6 +37,10 @@ public class Customer {
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
+
+    //
+    // --- get / set ---
+    //
 
     public int increaseOrderCount() {
         return this.orderCount++;
@@ -53,6 +65,10 @@ public class Customer {
     public Integer getOrderCount() {
         return orderCount;
     }
+
+    //
+    // --- misc ---
+    //
 
     @Override
     public String toString() {

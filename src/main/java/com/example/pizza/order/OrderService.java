@@ -30,10 +30,13 @@ public class OrderService {
     // injected beans
     //
 
-    private CustomerService customerService;
-    private ProductService productService;
-    private OrderRepository orderRepository;
-    private String greeting;
+    private final CustomerService customerService;
+
+    private final ProductService productService;
+
+    private final OrderRepository orderRepository;
+
+    private final String greeting;
 
     //
     // constructors and setup

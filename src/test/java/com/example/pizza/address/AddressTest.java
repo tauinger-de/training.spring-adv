@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 
 public class AddressTest {
 
-    private String street = "Test-Allee 1";
-    private String postalCode = "12345";
-    private String city = "Erbshausen";
+    private final String street = "Test-Allee 1";
+    private final String postalCode = "12345";
+    private final String city = "Erbshausen";
 
     @Test
     public void instantiating() {
