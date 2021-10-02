@@ -1,5 +1,6 @@
 package com.example.pizza.customer;
 
+import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,13 +21,15 @@ public class CustomerRestController {
     //
 
     private CustomerService customerService;
+    private ConversionService conversionService;
 
     //
     // --- constructors and setup ---
     //
 
-    public CustomerRestController(CustomerService customerService) {
+    public CustomerRestController(CustomerService customerService, ConversionService conversionService) {
         this.customerService = customerService;
+        this.conversionService = conversionService;
     }
 
     //
@@ -46,8 +49,10 @@ public class CustomerRestController {
 
     @PostMapping(CREATE_ENDPOINT)
     @ResponseStatus(HttpStatus.CREATED)
-    public Customer createCustomer(@RequestBody Customer customer) {
-        return this.customerService.createCustomer(customer);
+    public Customer createCustomer(@RequestBody CustomerInDto customerInDto) {
+        return this.customerService.createCustomer(
+                this.conversionService.convert(customerInDto, Customer.class)
+        );
     }
 
 }

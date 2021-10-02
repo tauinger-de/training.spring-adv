@@ -8,12 +8,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class ProductServiceTest {
 
-    @Autowired
     ProductService productService;
 
     String productId = "the-product-id";
     String productName = "blah";
     Double productPrice = 1.23;
+
+    @Autowired
+    public ProductServiceTest(ProductService productService) {
+        this.productService = productService;
+    }
 
     @Test
     void createProduct_failsForDuplicateProductId() {

@@ -10,8 +10,12 @@ import org.springframework.test.context.TestPropertySource;
 @TestPropertySource(properties = {"app.setup.customers = false"})
 public class CustomerSetupTest {
 
-    @Autowired
     CustomerService customerService;
+
+    @Autowired
+    public CustomerSetupTest(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     @Test
     public void noCustomersExist() {

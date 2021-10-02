@@ -10,6 +10,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -40,9 +41,10 @@ class CustomerRestControllerTest {
                 .perform(MockMvcRequestBuilders
                         .post(CustomerRestController.CREATE_ENDPOINT)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"fullName\":\"Test Case\"}"))
+                        .content("{\"fullName\":\"Test Case\", \"orderCount\":99}"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.orderCount", Matchers.is(0)))
                 .andReturn().getResponse().getContentAsString();
 
         // check persistence
@@ -50,6 +52,19 @@ class CustomerRestControllerTest {
         Customer customer = this.customerRepository.findById(customerId.longValue()).orElse(null);
         Assertions.assertNotNull(customer);
         Assertions.assertEquals("Test Case", customer.getFullName());
+    }
+
+    /**
+     * Validates a failing customer GET response
+     */
+    @Test
+    void getCustomer_notFound() throws Exception {
+        // when
+        this.mockMvc
+                .perform(MockMvcRequestBuilders.get(CustomerRestController.GET_ONE_ENDPOINT, Integer.MIN_VALUE))
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is(HttpStatus.NOT_FOUND.name())))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.type", Matchers.is(CustomerNotFoundException.class.getSimpleName())));
     }
 
     /**
