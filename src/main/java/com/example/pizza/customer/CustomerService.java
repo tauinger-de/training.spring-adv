@@ -29,6 +29,13 @@ public class CustomerService {
     //
 
     @NonNull
+    public Customer getCustomer(long id) {
+        return this.repository
+                .findById(id)
+                .orElseThrow(() -> new CustomerNotFoundException("For id `" + id + "`"));
+    }
+
+    @NonNull
     public Customer getCustomerByPhoneNumber(String phoneNumber) {
         return this.repository
                 .findByPhoneNumber(phoneNumber)
