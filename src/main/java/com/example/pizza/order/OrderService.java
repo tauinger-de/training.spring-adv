@@ -38,6 +38,8 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
+    private final String greeting;
+
     //
     // constructors and setup
     //
