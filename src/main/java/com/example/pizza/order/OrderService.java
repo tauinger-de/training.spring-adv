@@ -17,17 +17,19 @@ public class OrderService {
     // fields
     //
 
-    Integer deliveryTimeInMinutes = 30;
+    final Integer deliveryTimeInMinutes = 30;
 
-    Map<String, Double> dailyDiscounts = new HashMap<>();
+    final Map<String, Double> dailyDiscounts = new HashMap<>();
 
     //
     // injected beans
     //
 
-    private CustomerService customerService;
-    private ProductService productService;
-    private OrderRepository orderRepository;
+    private final CustomerService customerService;
+
+    private final ProductService productService;
+
+    private final OrderRepository orderRepository;
 
     //
     // constructors and setup

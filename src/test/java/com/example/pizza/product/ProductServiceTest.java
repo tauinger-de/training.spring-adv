@@ -11,9 +11,9 @@ class ProductServiceTest {
     @Autowired
     ProductService productService;
 
-    String productId = "the-product-id";
-    String productName = "blah";
-    Double productPrice = 1.23;
+    final String productId = "the-product-id";
+    final String productName = "blah";
+    final Double productPrice = 1.23;
 
     @Test
     void createProduct_failsForDuplicateProductId() {

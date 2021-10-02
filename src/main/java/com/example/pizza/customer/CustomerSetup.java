@@ -8,8 +8,17 @@ import java.util.Map;
 @Component
 public class CustomerSetup {
 
-    private CustomerService customerService;
-    private Map<String, Address> addresses;
+    //
+    // injected beans
+    //
+
+    private final CustomerService customerService;
+
+    private final Map<String, Address> addresses;
+
+    //
+    // constructors and setup
+    //
 
     public CustomerSetup(CustomerService customerService, Map<String, Address> addresses) {
         this.customerService = customerService;
@@ -27,6 +36,10 @@ public class CustomerSetup {
                 addresses.get("bonn"),
                 "123-667788");
     }
+
+    //
+    // business logic
+    //
 
     private Customer createCustomer(String fullName, Address address, String phoneNumber) {
         return this.customerService.createCustomer(new Customer(fullName, address, phoneNumber));
