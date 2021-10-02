@@ -11,7 +11,7 @@ public class ProductService {
     // injected beans
     //
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     //
     // constructors and setup

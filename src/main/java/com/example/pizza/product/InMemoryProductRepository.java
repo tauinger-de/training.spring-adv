@@ -13,7 +13,7 @@ public class InMemoryProductRepository implements ProductRepository {
     // fields
     //
 
-    Map<String, Product> productsById = new HashMap<>();
+    final Map<String, Product> productsById = new HashMap<>();
 
     //
     // ProductRepository implementation

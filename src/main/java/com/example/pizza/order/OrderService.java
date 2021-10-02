@@ -17,9 +17,9 @@ public class OrderService {
     // fields
     //
 
-    Integer deliveryTimeInMinutes = 30;
+    final Integer deliveryTimeInMinutes = 30;
 
-    Map<String, Double> dailyDiscounts = new HashMap<>();
+    final Map<String, Double> dailyDiscounts = new HashMap<>();
 
     //
     // injected beans
