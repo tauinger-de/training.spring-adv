@@ -35,6 +35,7 @@ class CustomerRestControllerTest {
 
     @Test
     void createCustomer() throws Exception {
+        // exec and check request
         String responseJson = this.mockMvc
                 .perform(MockMvcRequestBuilders
                         .post(CustomerRestController.CREATE_ENDPOINT)

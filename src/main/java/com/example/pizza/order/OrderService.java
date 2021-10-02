@@ -3,6 +3,8 @@ package com.example.pizza.order;
 import com.example.pizza.customer.Customer;
 import com.example.pizza.customer.CustomerService;
 import com.example.pizza.product.ProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -14,6 +16,12 @@ import java.util.Map;
 
 @Service
 public class OrderService {
+
+    //
+    // constants
+    //
+
+    private static Logger LOG = LoggerFactory.getLogger(OrderService.class);
 
     //
     // fields
@@ -62,8 +70,7 @@ public class OrderService {
         String nameOfDayOfWeek = LocalDate.now().getDayOfWeek().name();
         Double discountRate = this.dailyDiscounts.getOrDefault(nameOfDayOfWeek, 0.0);
         Double discountedTotalPrice = totalPrice * (1.0 - discountRate / 100.0);
-        System.out.println("Reducing price of order from " + totalPrice + " to " + discountedTotalPrice
-                + " due to today's discount of " + discountRate + "%");
+        LOG.debug("Reducing price of order from {} to {} due to today's discount of {}%", totalPrice, discountedTotalPrice, discountRate);
 
         // create order
         Order order = new Order(
