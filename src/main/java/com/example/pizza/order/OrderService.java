@@ -3,7 +3,6 @@ package com.example.pizza.order;
 import com.example.pizza.customer.Customer;
 import com.example.pizza.customer.CustomerService;
 import com.example.pizza.product.ProductService;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -33,18 +32,15 @@ public class OrderService {
     private CustomerService customerService;
     private ProductService productService;
     private OrderRepository orderRepository;
-    private String greeting;
 
     //
     // constructors and setup
     //
 
-    public OrderService(CustomerService customerService, ProductService productService, OrderRepository orderRepository,
-                        @Qualifier("greeting") String greeting) {
+    public OrderService(CustomerService customerService, ProductService productService, OrderRepository orderRepository) {
         this.customerService = customerService;
         this.productService = productService;
         this.orderRepository = orderRepository;
-        this.greeting = greeting;
     }
 
     //
@@ -53,9 +49,6 @@ public class OrderService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     public Order placeOrder(String phoneNumber, Map<String, Integer> productQuantities) {
-        // greet
-        System.out.println(this.greeting);
-
         // make sure customer exists -- throws exception if doesn't
         Customer customer = this.customerService.getCustomerByPhoneNumber(phoneNumber);
 
