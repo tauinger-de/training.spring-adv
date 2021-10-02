@@ -2,9 +2,19 @@ package com.example.pizza.customer;
 
 public class Address {
 
+    //
+    // --- fields ---
+    //
+
     private String street;
+
     private String postalCode;
+
     private String city;
+
+    //
+    // --- constructors ---
+    //
 
     public Address() {
     }
@@ -14,6 +24,10 @@ public class Address {
         this.postalCode = postalCode;
         this.city = city;
     }
+
+    //
+    // --- get / set ---
+    //
 
     public String getStreet() {
         return street;
@@ -38,6 +52,10 @@ public class Address {
     public void setCity(String city) {
         this.city = city;
     }
+
+    //
+    // --- misc ---
+    //
 
     @Override
     public String toString() {

@@ -2,6 +2,10 @@ package com.example.pizza.customer;
 
 public class Customer {
 
+    //
+    // --- fields ---
+    //
+
     private Long id;
 
     private String fullName;
@@ -9,6 +13,10 @@ public class Customer {
     private Address address;
 
     private String phoneNumber;
+
+    //
+    // --- constructors ---
+    //
 
     public Customer() {
     }
@@ -18,6 +26,10 @@ public class Customer {
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
+
+    //
+    // --- get / set ---
+    //
 
     public Long getId() {
         return id;
@@ -34,6 +46,10 @@ public class Customer {
     public Address getAddress() {
         return address;
     }
+
+    //
+    // --- misc ---
+    //
 
     @Override
     public String toString() {

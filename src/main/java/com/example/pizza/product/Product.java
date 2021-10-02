@@ -2,11 +2,19 @@ package com.example.pizza.product;
 
 public class Product {
 
+    //
+    // --- fields ---
+    //
+
     String productId;
 
     String name;
 
     Double price;
+
+    //
+    // --- constructors ---
+    //
 
     public Product() {
     }
@@ -16,6 +24,10 @@ public class Product {
         this.name = name;
         this.price = price;
     }
+
+    //
+    // --- get / set ---
+    //
 
     public String getProductId() {
         return productId;
@@ -28,6 +40,10 @@ public class Product {
     public Double getPrice() {
         return price;
     }
+
+    //
+    // --- misc ---
+    //
 
     @Override
     public String toString() {
