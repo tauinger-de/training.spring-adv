@@ -29,9 +29,11 @@ public class OrderService {
     // injected beans
     //
 
-    private CustomerService customerService;
-    private ProductService productService;
-    private OrderRepository orderRepository;
+    private final CustomerService customerService;
+
+    private final ProductService productService;
+
+    private final OrderRepository orderRepository;
 
     //
     // constructors and setup

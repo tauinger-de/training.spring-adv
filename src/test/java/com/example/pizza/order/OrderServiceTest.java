@@ -20,7 +20,7 @@ public class OrderServiceTest {
     @Autowired
     CustomerRepository customerRepository;
 
-    String customerPhoneNumber = "123456789";
+    final String customerPhoneNumber = "123456789";
 
     @Test
     void placeOrder_customerOrderCountIncreasesDespiteTransactionFail() {
