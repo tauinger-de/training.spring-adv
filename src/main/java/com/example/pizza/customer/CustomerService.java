@@ -1,5 +1,6 @@
 package com.example.pizza.customer;
 
+import com.example.pizza.aop.LogExecutionTime;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -29,6 +30,7 @@ public class CustomerService {
     //
 
     @NonNull
+    @LogExecutionTime
     public Customer getCustomer(long id) {
         return this.repository
                 .findById(id)
@@ -36,6 +38,7 @@ public class CustomerService {
     }
 
     @NonNull
+    @LogExecutionTime
     public Customer getCustomerByPhoneNumber(String phoneNumber) {
         return this.repository
                 .findByPhoneNumber(phoneNumber)
@@ -43,11 +46,13 @@ public class CustomerService {
     }
 
     @NonNull
+    @LogExecutionTime
     public Iterable<Customer> getAllCustomers() {
         return this.repository.findAll();
     }
 
     @NonNull
+    @LogExecutionTime
     public Customer createCustomer(Customer customer) {
         return this.repository.save(customer);
     }
