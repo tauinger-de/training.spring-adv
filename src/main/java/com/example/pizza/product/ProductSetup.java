@@ -9,7 +9,15 @@ import javax.annotation.PostConstruct;
 @Profile("!production")
 public class ProductSetup {
 
-    private ProductService productService;
+    //
+    // injected beans
+    //
+
+    private final ProductService productService;
+
+    //
+    // constructors and setup
+    //
 
     public ProductSetup(ProductService productService) {
         this.productService = productService;
@@ -24,6 +32,10 @@ public class ProductSetup {
         createProduct("P-11", "Pizza Capricciosa", 7.50);
         createProduct("P-12", "Pizza Spinat und Feta", 7.00);
     }
+
+    //
+    // business logic
+    //
 
     private Product createProduct(String productId, String name, double price) {
         return this.productService.createProduct(new Product(productId, name, price));
