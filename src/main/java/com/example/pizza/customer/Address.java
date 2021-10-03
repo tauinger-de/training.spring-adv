@@ -1,5 +1,6 @@
 package com.example.pizza.customer;
 
+@SuppressWarnings("unused")
 public class Address {
 
     //

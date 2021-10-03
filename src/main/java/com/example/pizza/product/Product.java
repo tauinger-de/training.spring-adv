@@ -1,5 +1,6 @@
 package com.example.pizza.product;
 
+@SuppressWarnings("unused")
 public class Product {
 
     //
