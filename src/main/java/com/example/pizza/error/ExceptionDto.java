@@ -4,11 +4,11 @@ import org.springframework.http.HttpStatus;
 
 public class ExceptionDto {
 
-    HttpStatus status;
+    final HttpStatus status;
 
-    String type;
+    final String type;
 
-    String message;
+    final String message;
 
     public ExceptionDto(HttpStatus status, String type, String message) {
         this.status = status;

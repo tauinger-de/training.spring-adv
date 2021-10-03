@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class ProductServiceTest {
 
-    ProductService productService;
+    final ProductService productService;
 
     final String productId = "the-product-id";
     final String productName = "blah";

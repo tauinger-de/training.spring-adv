@@ -10,7 +10,7 @@ import org.springframework.test.context.TestPropertySource;
 @TestPropertySource(properties = {"app.setup.customers = false"})
 public class CustomerSetupTest {
 
-    CustomerService customerService;
+    final CustomerService customerService;
 
     @Autowired
     public CustomerSetupTest(CustomerService customerService) {
