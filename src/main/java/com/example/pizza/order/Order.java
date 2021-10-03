@@ -5,6 +5,7 @@ import com.example.pizza.customer.Customer;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@SuppressWarnings("JpaDataSourceORMInspection")
 @Entity
 @Table(name = "ORDERS") // just "order" is a reserved sql word!
 public class Order {

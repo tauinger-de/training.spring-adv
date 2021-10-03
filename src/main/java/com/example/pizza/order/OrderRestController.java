@@ -23,8 +23,8 @@ public class OrderRestController {
     // --- injected beans ---
     //
 
-    private OrderService orderService;
-    private String greeting;
+    private final OrderService orderService;
+    private final String greeting;
 
     //
     // --- constructors and setup ---

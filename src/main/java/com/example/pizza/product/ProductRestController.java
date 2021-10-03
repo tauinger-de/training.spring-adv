@@ -17,7 +17,7 @@ public class ProductRestController {
     // --- injected beans ---
     //
 
-    private ProductService productService;
+    private final ProductService productService;
 
     //
     // --- constructors and setup ---

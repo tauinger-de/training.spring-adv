@@ -14,7 +14,7 @@ public class CustomerService {
     // injected beans
     //
 
-    private CustomerRepository repository;
+    private final CustomerRepository repository;
 
     //
     // constructors and setup
