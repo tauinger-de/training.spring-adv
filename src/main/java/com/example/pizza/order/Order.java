@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "ORDERS") // just "order" is a reserved sql word!
+@SuppressWarnings("unused")
 public class Order {
 
     //
