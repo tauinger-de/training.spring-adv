@@ -23,7 +23,7 @@ public class OrderService {
     // constants
     //
 
-    private static Logger LOG = LoggerFactory.getLogger(OrderService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrderService.class);
 
     //
     // fields
