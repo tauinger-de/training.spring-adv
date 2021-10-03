@@ -20,12 +20,11 @@ public class OrderServiceTest {
     @Autowired
     CustomerRepository customerRepository;
 
-    String customerPhoneNumber;
+    final String customerPhoneNumber = "123456789";
 
     @Test
     void placeOrder_customerOrderCountIncreasesDespiteTransactionFail() {
         // setup test
-        customerPhoneNumber = "123456789";
         Customer customer = customerRepository.save(new Customer("Trans Action", null, customerPhoneNumber));
 
         // check count before test

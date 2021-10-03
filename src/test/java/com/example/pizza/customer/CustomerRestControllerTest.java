@@ -30,9 +30,9 @@ class CustomerRestControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
-    private String customerFullName = "Bill Gates";
-    private Address customerAddress = new Address("1415 L Street, Suite 200", "95814", "Sacramento, CA");
-    private String customerPhoneNumber = "+1 222 3333333";
+    private final String customerFullName = "Bill Gates";
+    private final Address customerAddress = new Address("1415 L Street, Suite 200", "95814", "Sacramento, CA");
+    private final String customerPhoneNumber = "+1 222 3333333";
 
     @Test
     void createCustomer() throws Exception {

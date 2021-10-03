@@ -4,28 +4,44 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.Map;
 
 @Component
 @ConditionalOnProperty(prefix = "app.setup", name = "customers", havingValue = "true")
 public class CustomerSetup {
 
-    private CustomerService customerService;
+    //
+    // injected beans
+    //
 
-    public CustomerSetup(CustomerService customerService) {
+    private final CustomerService customerService;
+
+    private final Map<String, Address> addresses;
+
+    //
+    // constructors and setup
+    //
+
+    public CustomerSetup(CustomerService customerService, Map<String, Address> addresses) {
         this.customerService = customerService;
+        this.addresses = addresses;
     }
 
     @PostConstruct
     public void createCustomers() {
         createCustomer(
                 "Enrico Palazzo",
-                new Address("Bornstr. 7", "44555", "Irgendwo"),
+                addresses.get("münchen"),
                 "123-4567");
         createCustomer(
                 "Frank Drebbin",
-                new Address("Dorfweg 21", "99887", "Wildhausen"),
+                addresses.get("bonn"),
                 "123-667788");
     }
+
+    //
+    // business logic
+    //
 
     private Customer createCustomer(String fullName, Address address, String phoneNumber) {
         return this.customerService.createCustomer(new Customer(fullName, address, phoneNumber));

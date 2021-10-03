@@ -17,7 +17,7 @@ public class LoggingAspect {
     // constants
     //
 
-    private static Logger LOG = LoggerFactory.getLogger(LoggingAspect.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LoggingAspect.class);
 
 
     //

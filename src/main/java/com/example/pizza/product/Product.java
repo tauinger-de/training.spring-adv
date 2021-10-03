@@ -6,12 +6,20 @@ import javax.persistence.Id;
 @Entity
 public class Product {
 
+    //
+    // --- fields ---
+    //
+
     @Id
     String productId;
 
     String name;
 
     Double price;
+
+    //
+    // --- constructors ---
+    //
 
     public Product() {
     }
@@ -21,6 +29,10 @@ public class Product {
         this.name = name;
         this.price = price;
     }
+
+    //
+    // --- get / set ---
+    //
 
     public String getProductId() {
         return productId;
@@ -33,6 +45,10 @@ public class Product {
     public Double getPrice() {
         return price;
     }
+
+    //
+    // --- misc ---
+    //
 
     @Override
     public String toString() {
