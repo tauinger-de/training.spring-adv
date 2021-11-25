@@ -1,0 +1,15 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:gs="http://soap.order.pizza.example.com">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <gs:placeOrderRequest>
+            <gs:phoneNumber>123-4567</gs:phoneNumber>
+            <gs:productQuantities>
+                <gs:mapEntry>
+                    <gs:key>P-11</gs:key>
+                    <gs:value>1</gs:value>
+                </gs:mapEntry>
+            </gs:productQuantities>
+        </gs:placeOrderRequest>
+    </soapenv:Body>
+</soapenv:Envelope>

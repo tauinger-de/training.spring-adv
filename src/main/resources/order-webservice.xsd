@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://soap.order.pizza.example.com"
+           targetNamespace="http://soap.order.pizza.example.com" elementFormDefault="qualified">
+    
+    <xs:element name="placeOrderRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="phoneNumber" type="xs:string"/>
+                <xs:element name="productQuantities" type="tns:quantityMap"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:complexType name="quantityMap">
+        <xs:sequence>
+            <xs:element name="mapEntry" type="tns:mapEntry" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="mapEntry">
+        <xs:sequence>
+            <xs:element name="key" type="xs:string"/>
+            <xs:element name="value" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
