@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -52,6 +53,11 @@ public class OrderService {
         this.greeting = greeting;
     }
 
+    @PostConstruct
+    public void dumpConfig() {
+        System.out.println("Configured delivery time in minutes: " + this.deliveryTimeInMinutes);
+    }
+
     //
     // business logic
     //
@@ -87,6 +93,7 @@ public class OrderService {
         return this.orderRepository.save(order);
     }
 
+    
     public Iterable<Order> getOrders() {
         return this.orderRepository.findAll();
     }
