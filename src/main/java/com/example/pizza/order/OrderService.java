@@ -45,8 +45,12 @@ public class OrderService {
     // constructors and setup
     //
 
-    public OrderService(CustomerService customerService, ProductService productService, OrderRepository orderRepository,
-                        @Qualifier("greeting") String greeting) {
+    public OrderService(
+            CustomerService customerService,
+            ProductService productService,
+            OrderRepository orderRepository,
+            @Qualifier("greeting") String greeting
+    ) {
         this.customerService = customerService;
         this.productService = productService;
         this.orderRepository = orderRepository;
@@ -93,7 +97,7 @@ public class OrderService {
         return this.orderRepository.save(order);
     }
 
-    
+
     public Iterable<Order> getOrders() {
         return this.orderRepository.findAll();
     }
