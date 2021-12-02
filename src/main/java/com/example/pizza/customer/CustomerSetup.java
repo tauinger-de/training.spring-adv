@@ -45,7 +45,7 @@ public class CustomerSetup {
     // business logic
     //
 
-    private Customer createCustomer(String fullName, Address address, String phoneNumber) {
-        return this.customerService.createCustomer(new Customer(fullName, address, phoneNumber));
+    private void createCustomer(String fullName, Address address, String phoneNumber) {
+        this.customerService.createCustomer(new Customer(fullName, address, phoneNumber));
     }
 }
