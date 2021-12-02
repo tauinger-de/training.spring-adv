@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -44,12 +45,21 @@ public class OrderService {
     // constructors and setup
     //
 
-    public OrderService(CustomerService customerService, ProductService productService, OrderRepository orderRepository,
-                        @Qualifier("greeting") String greeting) {
+    public OrderService(
+            CustomerService customerService,
+            ProductService productService,
+            OrderRepository orderRepository,
+            @Qualifier("greeting") String greeting
+    ) {
         this.customerService = customerService;
         this.productService = productService;
         this.orderRepository = orderRepository;
         this.greeting = greeting;
+    }
+
+    @PostConstruct
+    public void dumpConfig() {
+        System.out.println("Configured delivery time in minutes: " + this.deliveryTimeInMinutes);
     }
 
     //
@@ -86,6 +96,7 @@ public class OrderService {
         // persist and return it
         return this.orderRepository.save(order);
     }
+
 
     public Iterable<Order> getOrders() {
         return this.orderRepository.findAll();
