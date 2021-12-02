@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 @Component
-@Profile("!production")
+@Profile("default | product | order")
 public class ProductSetup {
 
     //
