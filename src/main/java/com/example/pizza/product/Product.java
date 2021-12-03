@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
+@SuppressWarnings("unused")
 public class Product {
 
     //

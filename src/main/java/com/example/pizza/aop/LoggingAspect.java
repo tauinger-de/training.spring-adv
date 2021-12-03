@@ -26,20 +26,23 @@ public class LoggingAspect {
 
     @Around("@annotation(LogExecutionTime)")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
+        // track time before and after method invocation
         long start = System.currentTimeMillis();
-
         Object proceed = joinPoint.proceed();
-
         long executionTime = System.currentTimeMillis() - start;
-        LOG.debug("{} ms execution time for {}", executionTime, joinPoint.getSignature());
+
+        // log it
+        Logger logger = LoggerFactory.getLogger(joinPoint.getSignature().getDeclaringType());
+        logger.debug("{} ms execution time for {}", executionTime, joinPoint.getSignature());
         return proceed;
     }
+
 
     @Before("execution(* com.example.pizza..*.create*(..))")
     public void logCreate(JoinPoint joinPoint) {
         if (joinPoint.getArgs().length == 1) {
-            // log output occurs twice, needs to be fixed: https://stackoverflow.com/questions/11516092/spring-aop-advice-called-twice
-            LOG.debug("Creating {}", joinPoint.getArgs()[0]);
+            Logger logger = LoggerFactory.getLogger(joinPoint.getSignature().getDeclaringType());
+            logger.debug("Creating {}", joinPoint.getArgs()[0]);
         }
     }
 }
