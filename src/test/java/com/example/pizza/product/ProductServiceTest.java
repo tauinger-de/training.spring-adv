@@ -11,7 +11,7 @@ import java.util.UUID;
 class ProductServiceTest {
 
     @Autowired
-    final ProductService productService;
+    ProductService productService;
 
     final String productId = "the-product-id";
     final String productName = "blah";
