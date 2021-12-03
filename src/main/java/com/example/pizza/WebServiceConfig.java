@@ -25,10 +25,10 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     }
 
 
-    @Bean(name = "countries")
+    @Bean(name = "order")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema ordersSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-        wsdl11Definition.setPortTypeName("OrdersPort");
+        wsdl11Definition.setPortTypeName("OrderPort");
         wsdl11Definition.setLocationUri("/ws");
         wsdl11Definition.setTargetNamespace("http://soap.order.pizza.example.com");
         wsdl11Definition.setSchema(ordersSchema);
