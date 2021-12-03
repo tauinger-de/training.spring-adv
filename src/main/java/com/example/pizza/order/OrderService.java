@@ -81,7 +81,7 @@ public class OrderService {
         // greet
         if (StringUtils.hasText(this.greeting)) System.out.println(this.greeting);
 
-        // make sure customer exists -- throws exception if doesn't
+        // make sure customer exists -- throws exception if it doesn't
         Customer customer = this.customerService.getCustomerByPhoneNumber(phoneNumber);
 
         // increase
