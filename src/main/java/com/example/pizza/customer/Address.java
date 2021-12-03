@@ -3,6 +3,7 @@ package com.example.pizza.customer;
 import javax.persistence.Embeddable;
 
 @Embeddable
+@SuppressWarnings("unused")
 public class Address {
 
     //

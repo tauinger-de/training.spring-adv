@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 @Component
-@Profile("!production")
+@Profile("default | product | order")
 public class ProductSetup {
 
     //
@@ -37,7 +37,7 @@ public class ProductSetup {
     // business logic
     //
 
-    private Product createProduct(String productId, String name, double price) {
-        return this.productService.createProduct(new Product(productId, name, price));
+    private void createProduct(String productId, String name, double price) {
+        this.productService.createProduct(new Product(productId, name, price));
     }
 }

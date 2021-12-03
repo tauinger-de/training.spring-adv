@@ -1,9 +1,11 @@
 package com.example.pizza.product;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Profile("default | product") // not enabled for "order" by design since we might want to hide public API
 public class ProductRestController {
 
     //
