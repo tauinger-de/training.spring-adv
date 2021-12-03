@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
+@SuppressWarnings("unused")
 public class Customer {
 
     //

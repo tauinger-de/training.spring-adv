@@ -1,10 +1,12 @@
 package com.example.pizza.customer;
 
 import org.springframework.core.convert.ConversionService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Profile("default | customer") // not enabled for "order" by design since we might want to hide public API
 public class CustomerRestController {
 
     //

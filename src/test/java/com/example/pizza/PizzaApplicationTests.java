@@ -8,6 +8,7 @@ class PizzaApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println("Context has loaded");
     }
 
 }

@@ -1,10 +1,12 @@
 package com.example.pizza.product;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
 @Service
+@Profile("default | product | order")
 public class ProductService {
 
     //
