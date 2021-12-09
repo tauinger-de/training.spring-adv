@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 import java.util.Map;
 
 @ConstructorBinding
-@ConfigurationProperties("app")
+@ConfigurationProperties("app.order")
 public class OrderConfig {
 
     private final Integer deliveryTimeInMinutes;

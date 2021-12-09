@@ -21,10 +21,10 @@ public class OrderService {
     //
 
     // use kebab-case!
-    @Value("${app.delivery-time-in-minutes}")
+    @Value("${app.order.delivery-time-in-minutes}")
     Integer deliveryTimeInMinutes;
 
-    @Value("#{${app.daily-discounts}}")
+    @Value("#{${app.order.daily-discounts}}")
     Map<String, Double> dailyDiscounts;
 
     //
