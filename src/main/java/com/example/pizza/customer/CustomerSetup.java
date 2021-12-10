@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 import java.util.Map;
 
 @Component
-@ConditionalOnProperty(prefix = "app.setup", name = "customers", havingValue = "true")
+@ConditionalOnProperty(name = "app.customer.perform-setup", havingValue = "true")
 public class CustomerSetup {
 
     //
