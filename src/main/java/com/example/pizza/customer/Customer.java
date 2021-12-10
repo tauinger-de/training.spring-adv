@@ -1,9 +1,6 @@
 package com.example.pizza.customer;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @SuppressWarnings("unused")
@@ -22,6 +19,7 @@ public class Customer {
     @Embedded
     private Address address;
 
+    @Column(name = "phone")
     private String phoneNumber;
 
     private Integer orderCount = 0;
