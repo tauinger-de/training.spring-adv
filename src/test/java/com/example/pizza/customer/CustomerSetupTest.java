@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest
-@TestPropertySource(properties = {"app.setup.customers = false"})
+@TestPropertySource(properties = {"app.customer.perform-setup = false"})
 public class CustomerSetupTest {
 
     final CustomerService customerService;
