@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.integration.annotation.InboundChannelAdapter;
 import org.springframework.integration.annotation.Poller;
@@ -36,6 +37,7 @@ public class FileIntegrationConfig {
     private static final String FILE_DATA_DIR = "./data";
 
     @Bean
+    @Profile("default | order")
     public MessageChannel fileChannel() {
         return new DirectChannel();
     }
@@ -43,6 +45,7 @@ public class FileIntegrationConfig {
 
     @Bean
     @InboundChannelAdapter(value = "fileChannel", poller = @Poller(fixedDelay = "5000"))
+    @Profile("default | order")
     public MessageSource<File> fileReadingMessageSource() {
         FileReadingMessageSource sourceReader = new FileReadingMessageSource();
         sourceReader.setDirectory(new File(FILE_DATA_DIR));
@@ -53,6 +56,7 @@ public class FileIntegrationConfig {
 
     @Bean
     @ServiceActivator(inputChannel = "fileChannel")
+    @Profile("default | order")
     public MessageHandler fileWritingMessageHandler(ObjectMapper jsonMapper, OrderService orderService) {
         return msg -> {
             if (msg.getPayload() instanceof File) {
