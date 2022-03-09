@@ -3,6 +3,7 @@ package com.example.pizza.order;
 import com.example.pizza.order.soap.PlaceOrderRequest;
 import com.example.pizza.order.soap.PlaceOrderResponse;
 import com.example.pizza.order.soap.QuantityMap;
+import org.springframework.context.annotation.Profile;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Endpoint
+@Profile("default | order")
 public class OrderSoapEndpoint {
 
     private static final String NAMESPACE = "http://soap.order.pizza.example.com";
