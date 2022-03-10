@@ -1,5 +1,5 @@
-# docker build -t integrata/spring-aufbau .
-# docker run -p 8080:8080 --name spring-aufbau integrata/spring-aufbau:latest
+# docker build -t pizza-backend .
+# docker run -p 8080:8080 --name pizza-backend pizza-backend
 
 FROM openjdk:11
 
