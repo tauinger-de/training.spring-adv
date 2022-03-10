@@ -13,14 +13,14 @@ public class ProductService {
     // injected beans
     //
 
-    private final ProductRepository productRepository;
+    private final ProductApiClient productApiClient;
 
     //
     // constructors and setup
     //
 
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductService(ProductApiClient productApiClient) {
+        this.productApiClient = productApiClient;
     }
 
     //
@@ -28,13 +28,11 @@ public class ProductService {
     //
 
     public Iterable<Product> getAllProducts() {
-        return this.productRepository.findAll();
+        return this.productApiClient.findAll();
     }
 
     public Product getProduct(String productId) {
-        return this.productRepository
-                .findById(productId)
-                .orElseThrow(() -> new ProductNotFoundException("For productId `" + productId + "`"));
+        return this.productApiClient.findById(productId);
     }
 
     public Double getTotalPrice(Map<String, Integer> productQuantities) {
@@ -48,10 +46,4 @@ public class ProductService {
                 .sum();
     }
 
-    public Product createProduct(Product product) {
-        if (this.productRepository.existsById(product.productId)) {
-            throw new IllegalStateException("Persistence already contains a product with id: " + product.productId);
-        }
-        return this.productRepository.save(product);
-    }
 }

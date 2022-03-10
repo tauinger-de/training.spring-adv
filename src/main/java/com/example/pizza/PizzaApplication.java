@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnResource;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.util.StreamUtils;
 
@@ -13,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 
 @SpringBootApplication
 @EnableConfigurationProperties(OrderConfig.class)
+@EnableFeignClients
 public class PizzaApplication {
 
     public static void main(String[] args) {
