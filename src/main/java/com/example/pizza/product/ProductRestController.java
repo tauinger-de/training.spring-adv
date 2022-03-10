@@ -2,6 +2,7 @@ package com.example.pizza.product;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -14,6 +15,7 @@ public class ProductRestController {
 
     static final String ROOT = "/products";
     static final String GET_MANY_ENDPOINT = ROOT;
+    static final String GET_ONE_ENDPOINT = ROOT + "/{productId}";
 
     //
     // --- injected beans ---
@@ -37,4 +39,11 @@ public class ProductRestController {
     public Iterable<Product> getProducts() {
         return this.productService.getAllProducts();
     }
+
+
+    @GetMapping(GET_ONE_ENDPOINT)
+    public Product getProduct(@PathVariable String productId) {
+        return this.productService.getProduct(productId);
+    }
+
 }
