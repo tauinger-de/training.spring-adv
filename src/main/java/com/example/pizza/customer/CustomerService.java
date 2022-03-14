@@ -7,7 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @Profile("default | customer | order")
@@ -49,9 +53,19 @@ public class CustomerService {
 
     @NonNull
     @LogExecutionTime
-    public Iterable<Customer> getAllCustomers() {
-        return this.repository.findAll();
+    public Iterable<Customer> getCustomers(Collection<Predicate<Customer>> filters) {
+        return StreamSupport.stream(this.repository.findAll().spliterator(), false)
+                .filter(c -> filters.stream().allMatch(f -> f.test(c)))
+                .collect(Collectors.toList());
     }
+
+
+    @NonNull
+    @LogExecutionTime
+    public Iterable<Customer> getAllCustomers() {
+        return getCustomers(null);
+    }
+
 
     @NonNull
     @LogExecutionTime
