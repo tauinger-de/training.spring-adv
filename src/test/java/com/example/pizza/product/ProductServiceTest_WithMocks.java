@@ -17,7 +17,7 @@ class ProductServiceTest_WithMocks {
     ProductService productService;
 
     @MockBean
-    ProductRepository productRepository;
+    ProductApiClient productApiClient;
 
     final String productId = "the-product-id";
     final String productName = "blah";
@@ -27,7 +27,7 @@ class ProductServiceTest_WithMocks {
     void getTotalPrice() {
         // mock test fixture
         Product someDish = new Product(productId, productName, productPrice);
-        Mockito.when(this.productRepository.findById(productId)).thenReturn(Optional.of(someDish));
+        Mockito.when(this.productApiClient.findById(productId)).thenReturn(someDish);
 
         // execute
         int quantity = 2;

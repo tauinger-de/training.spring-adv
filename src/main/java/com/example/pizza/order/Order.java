@@ -18,7 +18,7 @@ public class Order {
     @GeneratedValue
     Long id;
 
-    @ManyToOne
+    @Embedded
     Customer customer;
 
     Double totalPrice;

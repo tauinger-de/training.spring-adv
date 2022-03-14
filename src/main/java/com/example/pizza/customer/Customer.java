@@ -2,7 +2,7 @@ package com.example.pizza.customer;
 
 import javax.persistence.*;
 
-@Entity
+@Embeddable
 @SuppressWarnings("unused")
 public class Customer {
 
@@ -10,19 +10,17 @@ public class Customer {
     // --- fields ---
     //
 
-    @Id
-    @GeneratedValue
+    @Column(name = "customer_id")
     private Long id;
 
+    @Column(name = "customer_fullname")
     private String fullName;
 
     @Embedded
     private Address address;
 
-    @Column(name = "phone")
+    @Column(name = "customer_phone")
     private String phoneNumber;
-
-    private Integer orderCount = 0;
 
     //
     // --- constructors ---
@@ -31,7 +29,8 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String fullName, Address address, String phoneNumber) {
+    public Customer(long id, String fullName, Address address, String phoneNumber) {
+        this.id = id;
         this.fullName = fullName;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -40,10 +39,6 @@ public class Customer {
     //
     // --- get / set ---
     //
-
-    public int increaseOrderCount() {
-        return this.orderCount++;
-    }
 
     public Long getId() {
         return id;
@@ -61,10 +56,6 @@ public class Customer {
         return address;
     }
 
-    public Integer getOrderCount() {
-        return orderCount;
-    }
-
     //
     // --- misc ---
     //
@@ -76,7 +67,6 @@ public class Customer {
                 ", fullName='" + fullName + '\'' +
                 ", address=" + address +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", orderCount=" + orderCount +
                 '}';
     }
 }

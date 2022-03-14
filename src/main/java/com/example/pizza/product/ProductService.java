@@ -1,6 +1,8 @@
 package com.example.pizza.product;
 
+import feign.FeignException;
 import org.springframework.context.annotation.Profile;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -27,12 +29,17 @@ public class ProductService {
     // business logic
     //
 
-    public Iterable<Product> getAllProducts() {
-        return this.productApiClient.findAll();
-    }
-
     public Product getProduct(String productId) {
-        return this.productApiClient.findById(productId);
+        try {
+            return this.productApiClient.findById(productId);
+        } catch (FeignException e) {
+            if (e.status() == HttpStatus.NOT_FOUND.value()) {
+                throw new ProductNotFoundException("Product with id " + productId + " not found");
+            }
+            else {
+                throw e;
+            }
+        }
     }
 
     public Double getTotalPrice(Map<String, Integer> productQuantities) {

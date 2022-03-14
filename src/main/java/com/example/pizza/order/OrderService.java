@@ -84,9 +84,6 @@ public class OrderService {
         // make sure customer exists -- throws exception if it doesn't
         Customer customer = this.customerService.getCustomerByPhoneNumber(phoneNumber);
 
-        // increase
-        this.customerService.increaseOrderCount(customer.getId());
-
         // calculate total price
         Double totalPrice = this.productService.getTotalPrice(productQuantities);
 

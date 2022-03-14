@@ -1,46 +1,54 @@
 package com.example.pizza.order;
 
 import com.example.pizza.customer.Customer;
-import com.example.pizza.customer.CustomerRepository;
-import com.example.pizza.product.ProductNotFoundException;
+import com.example.pizza.customer.CustomerApiClient;
+import com.example.pizza.product.Product;
+import com.example.pizza.product.ProductApiClient;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.TestPropertySource;
 
-import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
+@TestPropertySource(properties = { "app.order.daily-discounts={DUMMY:'0'}"})
 public class OrderServiceTest {
 
     @Autowired
     OrderService orderService;
 
-    @Autowired
-    CustomerRepository customerRepository;
+    @MockBean
+    CustomerApiClient customerApiClient;
+
+    @MockBean
+    ProductApiClient productApiClient;
 
     final String customerPhoneNumber = "123456789";
 
     @Test
-    void placeOrder_customerOrderCountIncreasesDespiteTransactionFail() {
-        // setup test
-        Customer customer = customerRepository.save(new Customer("Trans Action", null, customerPhoneNumber));
+    void placeOrder() {
+        // given
+        Product prd1 = new Product("p1", "Some Product", 100.0);
+        Product prd2 = new Product("p2", "Another Product", 1000.0);
+        Mockito.when(productApiClient.findById(prd1.getProductId())).thenReturn(prd1);
+        Mockito.when(productApiClient.findById(prd2.getProductId())).thenReturn(prd2);
 
-        // check count before test
-        assertThat(customerRepository.findById(customer.getId()))
-                .hasValueSatisfying(c -> assertThat(c.getOrderCount()).isEqualTo(0));
+        Customer customer = new Customer(12345, "Tony Test", null, customerPhoneNumber);
+        Mockito.when(customerApiClient.findMany(Map.of("phoneNumber", customerPhoneNumber))).thenReturn(List.of(customer));
 
-        // place order for missing product (we don't have any product at this point)
-        Map<String, Integer> itemQuantities = Collections.singletonMap("whatever", 1);
-        assertThatThrownBy(
-                () -> orderService.placeOrder(customerPhoneNumber, itemQuantities)
-        ).isInstanceOf(ProductNotFoundException.class);
+        // when
+        var order = orderService.placeOrder(
+                customerPhoneNumber,
+                Map.of(prd1.getProductId(), 1, prd2.getProductId(), 2));
 
-        // check count after test
-        assertThat(customerRepository.findById(customer.getId()))
-                .hasValueSatisfying(c -> assertThat(c.getOrderCount()).isEqualTo(1));
+        // then
+        assertThat(order).isNotNull();
+        assertThat(order.getTotalPrice()).isEqualTo(2100.0);
     }
 }
