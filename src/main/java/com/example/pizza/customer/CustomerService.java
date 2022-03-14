@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -43,6 +44,7 @@ public class CustomerService {
                 .orElseThrow(() -> new CustomerNotFoundException("For id `" + id + "`"));
     }
 
+
     @NonNull
     @LogExecutionTime
     public Customer getCustomerByPhoneNumber(String phoneNumber) {
@@ -51,11 +53,14 @@ public class CustomerService {
                 .orElseThrow(() -> new CustomerNotFoundException("For phoneNumber `" + phoneNumber + "`"));
     }
 
+
     @NonNull
     @LogExecutionTime
     public Iterable<Customer> getCustomers(Collection<Predicate<Customer>> filters) {
+        Collection<Predicate<Customer>> nonNullFilters = (filters == null) ? Collections.emptyList() : filters;
+        var overallFilterPredicate = nonNullFilters.stream().reduce(c -> true, Predicate::and);
         return StreamSupport.stream(this.repository.findAll().spliterator(), false)
-                .filter(c -> filters.stream().allMatch(f -> f.test(c)))
+                .filter(overallFilterPredicate)
                 .collect(Collectors.toList());
     }
 
@@ -72,6 +77,7 @@ public class CustomerService {
     public Customer createCustomer(Customer customer) {
         return this.repository.save(customer);
     }
+
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void increaseOrderCount(long customerId) {
