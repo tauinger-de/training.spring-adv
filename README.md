@@ -9,8 +9,11 @@ Die Beispielanwendung der Spring Aufbau Schulung.
 Das Backend wird umgebaut, so dass nur noch die `order` business domain enthalten ist und für
 `customer` und `product` per Feign-Client auf separat deployte Microservices zugegriffen wird.
 
-* meisten Klassen aus `customer` und `product` entfernt
+* zentrale Klassen aus `customer` und `product` entfernt, insbesondere
+  * Repositories
+  * REST-Controller
 * Einführung neuer API clients
+* Service Klassen umgeschrieben, so dass diese nun die API Clients statt Repositories nutzen
 
 ### v400
 
