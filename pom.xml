@@ -13,7 +13,7 @@
 
     <groupId>com.example</groupId>
     <artifactId>spring-aufbau</artifactId>
-    <version>1-SNAPSHOT</version>
+    <version>010-SNAPSHOT</version>
     <name>spring-aufbau</name>
     <description>Demo project for Spring Boot</description>
 
