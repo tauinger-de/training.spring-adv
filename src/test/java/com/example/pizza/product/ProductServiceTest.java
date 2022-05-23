@@ -36,6 +36,9 @@ class ProductServiceTest {
         Assertions.assertThat(product).isNotNull();
     }
 
+    /**
+     * Tests that an exception is thrown if we try to create multiple products having the same id
+     */
     @Test
     void createProduct_failsForDuplicateProductId() {
         // given - create product
