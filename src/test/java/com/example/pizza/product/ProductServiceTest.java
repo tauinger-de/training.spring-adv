@@ -18,6 +18,9 @@ class ProductServiceTest {
     final Double productPrice = 1.23;
 
 
+    /**
+     * Tests that we can retrieve a product from the service as expected.
+     */
     @Test
     void getProduct() {
         // given
