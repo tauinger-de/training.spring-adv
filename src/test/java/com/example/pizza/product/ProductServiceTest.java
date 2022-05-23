@@ -16,6 +16,9 @@ class ProductServiceTest {
     final String productName = "blah";
     final Double productPrice = 1.23;
 
+    /**
+     * Tests that an exception is thrown if we try to create multiple products having the same id
+     */
     @Test
     @Disabled
     void createProduct_failsForDuplicateProductId() {

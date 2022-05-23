@@ -13,6 +13,9 @@ class ProductServiceTest_WithMocks {
     // @MockBean
     // ProductRepository productRepository;
 
+    /**
+     * Tests that the total price for a range of products and quantities is calculated correctly.
+     */
     @Test
     void getTotalPrice() {
         // TODO
