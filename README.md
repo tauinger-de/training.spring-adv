@@ -21,5 +21,11 @@ POJO model classes, services and exceptions.
 
 This branch also adds first test classes to prepare for the next lesson.
 
+### v040 - Testing
+
+Adds unit and integration tests.
+
+ProductService and OrderService methods are implemented and an in-memory
+product repository developed and used.
 
 
