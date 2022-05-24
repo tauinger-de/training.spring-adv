@@ -14,8 +14,8 @@ Gehen Sie bitte auf die Seite https://start.spring.io/ und erstellen Sie mit dem
 Spring Initializr ein neues Projekt.
 
 Alle vorgeschlagenen Einstellungen übernehmen, bis auf:
+* GroupId "com.example"
 * Artifact "pizza"
-* Dependency "Spring Web" hinzufügen (zu finden via "web" Keyword)
 * Java Version: 11
 
 Dann **Generate** klicken und geladene ZIP Datei entpacken und Inhalt untersuchen. 
