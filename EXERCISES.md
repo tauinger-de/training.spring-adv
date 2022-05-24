@@ -108,3 +108,8 @@ Erstellen Sie bitte eine `CustomerSetup` Klasse, die:
 * und Nutzung der mittlerweile im Kontext existierenden `Address` Beans
 * zwei oder mehr `Customer` Instanzen anlegt 
 * und für diese die `createCustomer()` Methode des injizierten `CustomerService` aufruft
+
+
+## 040 - Testing
+
+### a) TODO
