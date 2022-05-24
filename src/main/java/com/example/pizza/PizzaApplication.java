@@ -20,7 +20,7 @@ public class PizzaApplication {
     }
 
     @Bean("greeting")
-    @ConditionalOnResource(resources = {"classpath:/greeting.txt"})
+    @ConditionalOnResource(resources = "classpath:/greeting.txt")
     public String resourceString() {
         try {
             return StreamUtils.copyToString(
