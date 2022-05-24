@@ -41,25 +41,25 @@ falls die Begrüßung nicht leer ist.
 
 ## 070 - Transaktionen
 
-### Customer um “orderCount” erweitern
+### a) Customer um “orderCount” erweitern
 
 Fügen Sie einen Counter (Zählwert) im Customer namens `orderCount` ein – 
 die Getter-Methode dafür bitte nicht vergessen.
 
-### CustomerService erweitern
+### b) CustomerService erweitern
 
 Fügen Sie eine neue Methode 
 `com.example.pizza.customer.CustomerService#increaseOrderCount()` ein, die in einer 
 neuen Transaktion den Zähler hochsetzt und den neuen Wert persistiert.
 
-### OrderService erweitern
+### c) OrderService erweitern
 
 Rufen Sie die neue Methode im `CustomerService` aus `OrderService#placeOrder()` auf -- 
 und zwar gleich, nachdem der Customer geladen wurde.
 
 Außerdem soll die `placeOrder()` Methode auch in einer Transaktion ablaufen.
 
-### Test
+### d) Test
 
 Schreiben Sie einen Test 
 `com.example.pizza.order.OrderServiceTest#placeOrder_customerOrderCountIncreasesDespiteTransactionFail()` 
