@@ -18,6 +18,9 @@ class ProductServiceTest {
     final Double productPrice = 1.23;
 
 
+    /**
+     * Tests that we can retrieve a product from the service as expected.
+     */
     @Test
     void getProduct() {
         // given
@@ -33,6 +36,9 @@ class ProductServiceTest {
         Assertions.assertThat(product).isNotNull();
     }
 
+    /**
+     * Tests that an exception is thrown if we try to create multiple products having the same id
+     */
     @Test
     void createProduct_failsForDuplicateProductId() {
         // given - create product
