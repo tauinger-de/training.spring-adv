@@ -4,16 +4,16 @@
 
 ### A) Konfiguration via application.properties
 
-Verändern Sie den OrderService, so dass die erwartete Lieferzeit in Minuten sowie die 
+Verändern Sie den OrderService, sodass die erwartete Lieferzeit in Minuten sowie die 
 Rabattierung je Wochentag in einer externen Konfigurationsquelle hinterlegt werden kann.
 
-*Hinweis: Hierfür gibt es zwei Möglichkeiten (mittels @Value oder @ConfigurationProperties, 
+*Hinweis: Hierfür gibt es zwei Möglichkeiten (mittels `@Value` oder `@ConfigurationProperties`, 
 letztere ist schwerer aufgrund des noch zu implementierenden Converters, siehe Musterlösung)
 
 ### B) Konfiguration von außen
 
 Starten Sie Ihre Anwendung auf eine Art und Weise, dass die Lieferzeit in Minuten nicht 
-aus den application.properties genutzt wird sondern von außen durch einen anderen Wert 
+aus den `application.properties` genutzt wird, sondern von außen durch einen anderen Wert 
 ersetzt wird.
 
 Hierfür können Sie eine Umgebungsvariable, ein VM System Property oder ein Programmargument nutzen.
