@@ -179,7 +179,7 @@ den fehlenden Code.
 
 ### b) Pom.xml erweitern
 
-Fügen sie den JPA Starter und die H2 Dependency der pom.xml hinzu.
+Fügen Sie den JPA Starter und die H2 Dependency der pom.xml hinzu.
 
 Ggf. müssen Sie die Maven-Projektkonfiguration in Ihrer IDE aktualisieren.
 
@@ -245,7 +245,7 @@ Wird der erwartete Wert ausgegeben?
 Fügen Sie das Property `app.customer.perform-setup = true` zu Ihrer Konfiguration hinzu.
 
 Schreiben Sie die Klasse `CustomerSetup` so um, dass sie nur als Bean existiert (Stichwort `@Conditional...` Annotation), 
-wenn das Property den Wert “true” enthält.
+wenn das Property den Wert "true" enthält.
 
 ### e) Begrüßung
 
@@ -259,12 +259,15 @@ Injizieren Sie die Bean in den `OrderService`.
 Geben Sie den Begrüßungstext per `System.out.println()` zu Beginn der Bestellung aus, 
 falls die Begrüßung nicht leer ist.
 
+
 ## 070 - Transaktionen
 
-### a) Customer um “orderCount” erweitern
+### a) Customer um "orderCount" erweitern
 
 Fügen Sie einen Counter (Zählwert) im Customer namens `orderCount` ein – 
 die Getter-Methode dafür bitte nicht vergessen.
+
+Dies ist ein Zähler für die Anzahl **versuchter** (nicht unbedingt erfolgreicher) Bestellungen.
 
 ### b) CustomerService erweitern
 
@@ -274,7 +277,7 @@ neuen Transaktion den Zähler hochsetzt und den neuen Wert persistiert.
 
 ### c) OrderService erweitern
 
-Rufen Sie die neue Methode im `CustomerService` aus `OrderService#placeOrder()` auf -- 
+Rufen Sie die neue Methode im `CustomerService` aus `OrderService#placeOrder()` auf,  
 und zwar gleich, nachdem der Customer geladen wurde.
 
 Außerdem soll die `placeOrder()` Methode auch in einer Transaktion ablaufen.
