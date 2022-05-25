@@ -10,6 +10,9 @@ public class AddressTest {
     private final String postalCode = "12345";
     private final String city = "Erbshausen";
 
+    /**
+     * Tests that parameters supplied to the Address constructor equal those provided by getters
+     */
     @Test
     public void instantiating() {
         Address address = new Address(street, postalCode, city);
