@@ -43,6 +43,7 @@ class CustomerRestControllerTest {
                         .content("{\"fullName\":\"Test Case\"}"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNumber())
                 .andReturn().getResponse().getContentAsString();
 
         // check persistence
@@ -85,6 +86,7 @@ class CustomerRestControllerTest {
         this.mockMvc
                 .perform(MockMvcRequestBuilders.get(CustomerRestController.GET_ONE_ENDPOINT, customer.getId()))
                 .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(customer.getId()), Long.class)) // trick for asserting on Long!
                 .andExpect(MockMvcResultMatchers.jsonPath("$.fullName", Matchers.is(customerFullName)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.address.city", Matchers.is(customerAddress.getCity())));
     }

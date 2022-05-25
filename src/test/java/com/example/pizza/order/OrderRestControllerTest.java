@@ -67,7 +67,7 @@ class OrderRestControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(toJson(incomingOrderDto)))
                 .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.totalPrice", Matchers.is(1.8)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.customer.fullName", Matchers.is("Toni Test")));
     }
