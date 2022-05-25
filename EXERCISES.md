@@ -484,7 +484,7 @@ Basis der neuen Basisklasse und des Exception-DTOs.
 Erstellen Sie einen Test, der prüft, dass trotz Angabe eines "orderCounts" dieser bei 
 neu angelegten Kunden immer 0 beträgt.
 
-Wir wollen nicht, dass das Feld "orderCount2 weiterhin für neue Kunden angegeben und 
+Wir wollen nicht, dass das Feld "orderCount" weiterhin für neue Kunden angegeben und 
 somit vordefiniert werden kann.
 
 Dieser Test wird erst dann erfolgreich sein, wenn die folgenden drei Übungen bearbeitet wurden.
