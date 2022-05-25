@@ -43,7 +43,7 @@ public class OrderRestController {
 
     @GetMapping(GREETING_ENDPOINT)
     public String sayHello() {
-        return StringUtils.isEmpty(this.greeting) ? "Hello!" : this.greeting;
+        return StringUtils.hasText(this.greeting) ? this.greeting : "Hello!";
     }
 
     @PostMapping(PLACE_ORDER_ENDPOINT)
