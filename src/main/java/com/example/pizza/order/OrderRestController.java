@@ -1,10 +1,12 @@
 package com.example.pizza.order;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -45,6 +47,7 @@ public class OrderRestController {
     }
 
     @PostMapping(PLACE_ORDER_ENDPOINT)
+    @ResponseStatus(HttpStatus.CREATED)
     public Order placeOrder(@RequestBody IncomingOrderDto incomingOrderDto) {
         return this.orderService.placeOrder(
                 incomingOrderDto.phoneNumber,
