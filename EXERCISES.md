@@ -505,3 +505,57 @@ Nutzen Sie den `ConversionService` im `CustomerRestController`, um ein empfangen
 `CustomerInDto` in einen `Customer` zu konvertieren und mit diesem dann die 
 Geschäftslogik aufzurufen.
 
+
+## 130 - SOAP Webservice
+
+### Schnittstelle beschreiben
+
+Legen Sie eine XSD Datei an, in der Sie eine Service-Methode Ihrer Wahl als 
+SOAP-Methode beschreiben.
+
+### Anwendung konfigurieren
+
+Führen Sie die notwendigen Änderungen in der Anwendung durch, um SOAP Webservice 
+Unterstützung zu haben, d.h.:
+* Neue dependencies in die pom.xml eintragen
+* Aktivierung der Code-Generierung in der pom.xml
+* Konfiguration des neuen Source-Ordners in der pom.xml
+* Erstellung der WebServiceConfig Klasse 
+
+### Endpoint implementieren
+
+Legen Sie eine neue Klasse für den SOAP Endpoint an und implementieren Sie dort 
+die von Ihnen (in der .xsd) beschriebene Methode.
+
+### WSDL abfragen
+
+Starten Sie die Anwendung.
+
+Schauen Sie sich die (von Spring generierte) WSDL an http://localhost:8080/ws/order.wsdl
+
+### Anfrage senden
+
+Testen Sie den SOAP Webservice mittels eines curl Aufrufs auf der 
+Kommandozeile (den Body der Anfrage am besten in einer Datei hinterlegen)
+
+````
+> curl --header "content-type:text/xml" -d @src\test\resources\soap\placeOrder.xml http://localhost:8080/ws
+````
+
+````
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:gs="http://soap.order.pizza.example.com">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <gs:placeOrderRequest>
+            <gs:phoneNumber>123-4567</gs:phoneNumber>
+            <gs:productQuantities>
+                <gs:mapEntry>
+                    <gs:key>P-11</gs:key>
+                    <gs:value>1</gs:value>
+                </gs:mapEntry>
+            </gs:productQuantities>
+        </gs:placeOrderRequest>
+    </soapenv:Body>
+</soapenv:Envelope>
+````
