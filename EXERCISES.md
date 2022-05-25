@@ -427,8 +427,9 @@ Legen Sie darin eine statische Variable für einen Logger an.
 
 ### b) Erste Aspect Methode
 
-Programmieren Sie eine Methode logCreate(JoinPoint jp), die einen per Logger protokolliert, 
-wenn über eine Methode ein Objekt angelegt werden soll.
+Programmieren Sie eine Methode `logCreate(JoinPoint jp)`, die einen per Logger protokolliert, 
+wenn über eine Methode ein Objekt angelegt werden soll, sprich, wenn in
+einem Service eine `createXyz()` Methode aufgerufen wird.
 
 Die Ausgabe soll das anzulegende Objekt enthalten.
 
