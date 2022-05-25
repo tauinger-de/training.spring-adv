@@ -489,7 +489,7 @@ somit vordefiniert werden kann.
 
 Dieser Test wird erst dann erfolgreich sein, wenn die folgenden drei Übungen bearbeitet wurden.
 
-### f) CustomerDto
+### f) CustomerInDto
 
 Erstellen Sie eine `CustomerInDto` Klasse, welche genutzt werden soll, um beim 
 Anlegen eines neuen Kunden nur bestimmte Attribute zuzulassen. 
