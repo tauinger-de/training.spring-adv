@@ -449,3 +449,59 @@ Hinweis: `@LogExecutionTime` ist von Ihnen selber als Annotation anzulegen.
 Bonus: Wie kann erreicht werden, dass nicht der Logger des Aspects, sondern der Logger 
 der Klasse genommen wird, in dem die mit `@LogExecutionTime` annotierte Methode enthalten ist?
 
+
+## 120 - RESTful Advanced (Fehler-Handling)
+
+### a) Exception DTO
+
+Erstellen Sie eine Klasse `com.example.pizza.error.ExceptionDto`, mittels derer 
+Fehlerinformationen (wie z.B. der HTTP Status Code, Fehlertext, Fehlertyp) 
+ausgeliefert werden können.
+
+### b) Optional: Fehlerantwort prüfen
+
+Erstellen Sie einen Test, der für einen fehlerhaften REST-Aufruf prüft, dass eine 
+Fehlerantwort auf Basis des Exception-DTO Objekts gesendet wird. Diese Prüfung kann 
+z.B. mittels JsonPath erfolgen.
+
+Erst nach Bearbeitung der folgenden zwei Übungen wird dieser Test erfolgreich durchlaufen
+
+### c) Überarbeitung Exceptions
+
+Überarbeiten Sie die vorhandenen Exception-Klassen der Geschäftslogik, sodass diese 
+eine Basisklasse nutzen, in der ein HTTP Status Code hinterlegt werden kann.
+
+### d) Fehler-Handling implementieren
+
+Implementieren Sie per `@ControllerAdvice` ein generisches Fehler-Handling auf 
+Basis der neuen Basisklasse und des Exception-DTOs.
+
+
+## 120 - RESTful Advanced (Model-Konvertierung)
+
+### e) Test-Driven-Development zur verbesserten Kundenanlage
+
+Erstellen Sie einen Test, der prüft, dass trotz Angabe eines "orderCounts" dieser bei 
+neu angelegten Kunden immer 0 beträgt.
+
+Wir wollen nicht, dass das Feld "orderCount2 weiterhin für neue Kunden angegeben und 
+somit vordefiniert werden kann.
+
+Dieser Test wird erst dann erfolgreich sein, wenn die folgenden drei Übungen bearbeitet wurden.
+
+### f) CustomerDto
+
+Erstellen Sie eine `CustomerInDto` Klasse, welche genutzt werden soll, um beim 
+Anlegen eines neuen Kunden nur bestimmte Attribute zuzulassen. 
+
+### g) Customer-Converter
+
+Erstellen Sie eine Converter Implementierung, die aus einer `CustomerInDto` 
+Instanz eine `Customer` Instanz macht.
+
+### h) ConversionService nutzen
+
+Nutzen Sie den `ConversionService` im `CustomerRestController`, um ein empfangenes 
+`CustomerInDto` in einen `Customer` zu konvertieren und mit diesem dann die 
+Geschäftslogik aufzurufen.
+
