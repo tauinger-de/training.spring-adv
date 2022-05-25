@@ -9,6 +9,4 @@ public class OrderServiceTest {
     @Autowired
     OrderService orderService;
 
-    String customerPhoneNumber = "123456789";
-
 }
