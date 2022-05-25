@@ -42,6 +42,7 @@ class CustomerRestControllerTest {
                         .content("{\"fullName\":\"Test Case\"}"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNumber())
                 .andReturn().getResponse().getContentAsString();
 
         // check persistence
