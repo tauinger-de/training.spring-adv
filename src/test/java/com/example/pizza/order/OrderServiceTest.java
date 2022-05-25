@@ -1,6 +1,5 @@
 package com.example.pizza.order;
 
-import com.example.pizza.customer.CustomerRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
