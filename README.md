@@ -1,6 +1,6 @@
 # Pizza Pronto Backend
 
-This is source code of the backend application for the Spring Advanced training.
+This is the source code of the backend application for the Spring Advanced training.
 
 ## Changelog
 
