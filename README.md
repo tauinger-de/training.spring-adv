@@ -80,6 +80,10 @@ Enables actuator endpoints.
 
 Adds the `aop` package including a LoggingAspect with two advices.
 
+### v120 - RESTful API advanced
+
+Adds exception handling and model conversion.
+
 ## Copyright
 
 Copyright Thomas Auinger (thomas@auinger.de), Germany. 
