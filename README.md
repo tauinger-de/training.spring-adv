@@ -84,6 +84,15 @@ Adds the `aop` package including a LoggingAspect with two advices.
 
 Adds exception handling and model conversion.
 
+### v130 - SOAP API
+
+Adds `spring-boot-starter-web-services` and `wsdl4j` dependencies as well
+as source code generation to the pom.xml
+
+**WARNING** - the project relies on generated source code from now on. This means
+that a maven build (e.g. `mvn compile`) must be done before the project can
+build inside the IDE.
+
 ## Copyright
 
 Copyright Thomas Auinger (thomas@auinger.de), Germany. 
