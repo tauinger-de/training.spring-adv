@@ -102,8 +102,6 @@ based files containing pizza orders and performs a service call for those.
 
 ### v400 - Microservices
 
-### v400
-
 The monolithic backend is prepared for use in a microservice architecture.
 
 * Dockerfile
