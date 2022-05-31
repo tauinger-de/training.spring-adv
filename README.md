@@ -1,6 +1,6 @@
 # Pizza Pronto Backend
 
-This is source code of the backend application for the Spring Advanced training.
+This is the source code of the backend application for the Spring Advanced training.
 
 ## Changelog
 
@@ -27,6 +27,11 @@ Adds unit and integration tests.
 
 ProductService and OrderService methods are implemented and an in-memory
 product repository developed and used.
+
+### v050 - Data JPA
+
+Introduces entity annotations, spring-data based repositories and
+their incorporation into every service.
 
 ## Copyright
 
