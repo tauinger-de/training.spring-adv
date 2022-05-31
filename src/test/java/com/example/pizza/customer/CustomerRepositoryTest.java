@@ -25,14 +25,15 @@ public class CustomerRepositoryTest {
     }
 
     @Test
-    void queryCustomersByPhoneNumberPrefix() throws Exception {
+    void queryCustomersByPhoneNumberPrefix() {
+        // if you want to access the h2 web console:
+        // - set a THREAD-ONLY breakpoint anywhere below this line
+        // - access the h2 console at http://localhost:8082 using the DB-URL configured at class level (default username and pwd)
+
         // given
         customerRepository.save(new Customer("A", null, "222 333"));
         customerRepository.save(new Customer("B", null, "222333"));
         customerRepository.save(new Customer("C", null, "23"));
-
-        // sleep so we can access h2 console at http://localhost:8082 using the DB-URL configured above
-//        Thread.sleep(600000);
 
         // when #1 -- query including whitespace
         var customers = customerRepository.queryCustomersByPhoneNumberPrefix("222 ");
