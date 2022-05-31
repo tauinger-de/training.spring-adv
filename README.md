@@ -65,6 +65,17 @@ the REST client tool "Insomnia".
 
 Adds XyzRestControllerTest classes.
 
+### v100 - Profiles, Logging & Monitoring
+
+Adds `spring-boot-starter-actuator` and `micrometer-registry-prometheus`
+dependencies.
+
+Adds a range of `@Profile` annotations to most beans.
+
+Makes use of Loggers instead of `System.out`.
+
+Enables actuator endpoints.
+
 ## Copyright
 
 Copyright Thomas Auinger (thomas@auinger.de), Germany. 
