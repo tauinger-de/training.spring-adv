@@ -76,6 +76,10 @@ Makes use of Loggers instead of `System.out`.
 
 Enables actuator endpoints.
 
+### v110 - AOP
+
+Adds the `aop` package including a LoggingAspect with two advices.
+
 ## Copyright
 
 Copyright Thomas Auinger (thomas@auinger.de), Germany. 
