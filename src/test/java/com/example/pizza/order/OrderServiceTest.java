@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class OrderServiceTest {
 
     @Autowired
-    OrderService orderService;
+    private OrderService orderService;
 
     @MockBean
     CustomerApiClient customerApiClient;
@@ -31,6 +31,9 @@ public class OrderServiceTest {
 
     final String customerPhoneNumber = "123456789";
 
+    /**
+     * Mocks both product and customer API clients and checks that we can place an order including correct amount.
+     */
     @Test
     void placeOrder() {
         // given

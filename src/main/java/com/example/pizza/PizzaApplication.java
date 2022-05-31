@@ -1,6 +1,6 @@
 package com.example.pizza;
 
-import com.example.pizza.order.OrderConfig;
+import com.example.pizza.order.OrderProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnResource;
@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 @SpringBootApplication
-@EnableConfigurationProperties(OrderConfig.class)
+@EnableConfigurationProperties(OrderProperties.class)
 @EnableFeignClients
 public class PizzaApplication {
 
@@ -22,7 +22,7 @@ public class PizzaApplication {
     }
 
     @Bean("greeting")
-    @ConditionalOnResource(resources = {"classpath:/greeting.txt"})
+    @ConditionalOnResource(resources = "classpath:/greeting.txt")
     public String resourceString() {
         try {
             return StreamUtils.copyToString(
