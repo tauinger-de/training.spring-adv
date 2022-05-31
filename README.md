@@ -30,8 +30,13 @@ product repository developed and used.
 
 ### v050 - Data JPA
 
+Adds spring-data-jpa and h2 dependencies to the project.
+
 Introduces entity annotations, spring-data based repositories and
 their incorporation into every service.
+
+The CustomerRepositoryTest includes an example of accessing the H2 web-console during
+test execution.
 
 ## Copyright
 
