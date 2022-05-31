@@ -38,6 +38,14 @@ their incorporation into every service.
 The CustomerRepositoryTest includes an example of accessing the H2 web-console during
 test execution.
 
+### v060 - Configuration
+
+Makes use of configuration values in services and setup classes.
+
+Introduces an unused OrderProperties holder class (which can be used instead of
+@Value annotations) and a StringToDoubleMapConverter
+implementation to parse the configuration string into a Map.
+
 ## Copyright
 
 Copyright Thomas Auinger (thomas@auinger.de), Germany. 
