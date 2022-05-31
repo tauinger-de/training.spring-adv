@@ -7,12 +7,12 @@ import java.util.Map;
 
 @ConstructorBinding
 @ConfigurationProperties("app.order")
-public class OrderConfig {
+public class OrderProperties {
 
     private final Integer deliveryTimeInMinutes;
     private final Map<String, Double> dailyDiscounts;
 
-    public OrderConfig(Integer deliveryTimeInMinutes, Map<String, Double> dailyDiscounts) {
+    public OrderProperties(Integer deliveryTimeInMinutes, Map<String, Double> dailyDiscounts) {
         this.deliveryTimeInMinutes = deliveryTimeInMinutes;
         this.dailyDiscounts = dailyDiscounts;
     }

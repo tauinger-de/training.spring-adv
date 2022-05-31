@@ -23,6 +23,9 @@ class ProductServiceTest_WithMocks {
     final String productName = "blah";
     final Double productPrice = 1.23;
 
+    /**
+     * Tests that the total price for a range of products and quantities is calculated correctly.
+     */
     @Test
     void getTotalPrice() {
         // mock test fixture

@@ -1,8 +1,7 @@
 package com.example.pizza.customer;
 
+@SuppressWarnings("unused")
 public class CustomerInDto {
-
-    private Long id;
 
     private String fullName;
 
@@ -11,14 +10,6 @@ public class CustomerInDto {
     private String phoneNumber;
 
     public CustomerInDto() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFullName() {
