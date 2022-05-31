@@ -93,6 +93,13 @@ as source code generation to the pom.xml
 that a maven build (e.g. `mvn compile`) must be done before the project can
 build inside the IDE.
 
+### v150 - Integration
+
+Adds `spring-integration-file` dependency.
+
+Includes a file integration setup that scans a certain directory for JSON
+based files containing pizza orders and performs a service call for those.
+
 ## Copyright
 
 Copyright Thomas Auinger (thomas@auinger.de), Germany. 
