@@ -68,7 +68,7 @@ Adds XyzRestControllerTest classes.
 ### v100 - Profiles, Logging & Monitoring
 
 Adds `spring-boot-starter-actuator` and `micrometer-registry-prometheus`
-dependencies.
+dependencies. Also adds git build info generation to `pom.xml`.
 
 Adds a range of `@Profile` annotations to most beans.
 
