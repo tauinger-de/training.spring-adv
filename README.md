@@ -61,6 +61,10 @@ Adds REST controllers.
 Provides an export of a request collection, which can be imported into 
 the REST client tool "Insomnia".
 
+### v090 - E2E-Testing
+
+Adds XyzRestControllerTest classes.
+
 ## Copyright
 
 Copyright Thomas Auinger (thomas@auinger.de), Germany. 
