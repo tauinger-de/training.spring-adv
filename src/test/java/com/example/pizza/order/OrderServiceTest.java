@@ -2,7 +2,9 @@ package com.example.pizza.order;
 
 import com.example.pizza.customer.Customer;
 import com.example.pizza.customer.CustomerRepository;
+import com.example.pizza.customer.CustomerSetup;
 import com.example.pizza.product.ProductNotFoundException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,12 +19,24 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class OrderServiceTest {
 
     @Autowired
-    OrderService orderService;
+    private OrderService orderService;
 
     @Autowired
-    CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private CustomerSetup customerSetup;
 
     final String customerPhoneNumber = "123456789";
+
+    /**
+     * Make sure we have exactly the list of customers as provided by the CustomerSetup.
+     */
+    @BeforeEach
+    public void setup() {
+        customerRepository.deleteAll();
+        customerSetup.createCustomers();
+    }
 
     /**
      * This test executes a simple order placement without any checks/assertions
@@ -39,6 +53,9 @@ public class OrderServiceTest {
                 Map.of(existingProductId, 1));
     }
 
+    /**
+     * Tests that the order-count is increased although the order process exists with an exception.
+     */
     @Test
     void placeOrder_customerOrderCountIncreasesDespiteTransactionFail() {
         // setup test
