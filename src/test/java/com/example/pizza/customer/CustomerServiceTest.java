@@ -10,13 +10,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class CustomerServiceTest {
 
     @Autowired
-    CustomerService customerService;
+    private CustomerService customerService;
 
     @Autowired
-    CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
 
-    Customer someCustomer;
+    private Customer someCustomer;
 
+    /**
+     * Remove all customers from persistence. Prepare an in-memory instance for testing.
+     */
     @BeforeEach
     public void setup() {
         customerRepository.deleteAll();
