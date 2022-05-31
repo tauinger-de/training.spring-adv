@@ -116,14 +116,14 @@ The monolithic backend is prepared for use in a microservice architecture.
   * http://localhost:8080/swagger-ui/index.html
   * http://localhost:8080/v3/api-docs/
 
-### v405
+### v405 - Order Microservice
 
-The backend is rebuilt so that only the `order` business domain is included and for
-`customer` and `product` is accessed via Feign client to separately deployed microservices.
+The backend is rebuilt so that only the `order` business domain is included and 
+`customer` and `product` services are accessed via Feign clients 
+from separately deployed microservices.
 
-* removed central classes from `customer` and `product`, in particular
-  * repositories
-  * REST controllers
+* removed most business classes of `customer` and `product`, in particular 
+repositories and REST controllers
 * introduction of new API clients
 * rewrote service classes so that they now use API clients instead of repositories
 
