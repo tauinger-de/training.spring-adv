@@ -1,6 +1,6 @@
 # Pizza Pronto Backend
 
-This is source code of the backend application for the Spring Advanced training.
+This is the source code of the backend application for the Spring Advanced training.
 
 ## Changelog
 
@@ -27,6 +27,39 @@ Adds unit and integration tests.
 
 ProductService and OrderService methods are implemented and an in-memory
 product repository developed and used.
+
+### v050 - Data JPA
+
+Adds spring-data-jpa and h2 dependencies to the project.
+
+Introduces entity annotations, spring-data based repositories and
+their incorporation into every service.
+
+The CustomerRepositoryTest includes an example of accessing the H2 web-console during
+test execution.
+
+### v060 - Configuration
+
+Makes use of configuration values in services and setup classes.
+
+Introduces an unused OrderProperties holder class (which can be used instead of
+`@Value` annotations) and a StringToDoubleMapConverter
+implementation to parse the configuration string into a Map.
+
+### v070 - Transactions
+
+Makes use of the `@Transactional` annotation.
+
+Introduces an order-count at Customer level.
+
+### v080 - RESTful API
+
+Replaces the `spring-boot-starter` dependency with `spring-boot-starter-web`.
+
+Adds REST controllers.
+
+Provides an export of a request collection, which can be imported into 
+the REST client tool "Insomnia".
 
 ## Copyright
 
