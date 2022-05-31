@@ -110,7 +110,7 @@ The monolithic backend is prepared for use in a microservice architecture.
   * remove container: `docker rm -f pizza-backend-product`
   * start container: `docker run -p 8082:8080 --name pizza-backend-product -e "SPRING_PROFILES_ACTIVE=product" pizza-backend:1.400`
   * see logs from container: `docker logs --follow <containerIdOrName>`
-  * start bash in container: `docker exec -it <containerIdOrName>`
+  * start bash in container: `docker exec -it <containerIdOrName> bash` (or just `sh` instead of `bash`)
 * new REST endpoints for the `customer` and `product` business domains.
 * Swagger 3 support
   * http://localhost:8080/swagger-ui/index.html
