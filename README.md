@@ -43,14 +43,23 @@ test execution.
 Makes use of configuration values in services and setup classes.
 
 Introduces an unused OrderProperties holder class (which can be used instead of
-@Value annotations) and a StringToDoubleMapConverter
+`@Value` annotations) and a StringToDoubleMapConverter
 implementation to parse the configuration string into a Map.
 
 ### v070 - Transactions
 
-Makes use of the @Transactional annotation.
+Makes use of the `@Transactional` annotation.
 
 Introduces an order-count at Customer level.
+
+### v080 - RESTful API
+
+Replaces the `spring-boot-starter` dependency with `spring-boot-starter-web`.
+
+Adds REST controllers.
+
+Provides an export of a request collection, which can be imported into 
+the REST client tool "Insomnia".
 
 ## Copyright
 
