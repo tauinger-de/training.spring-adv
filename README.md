@@ -28,6 +28,11 @@ Adds unit and integration tests.
 ProductService and OrderService methods are implemented and an in-memory
 product repository developed and used.
 
+### v050 - Data JPA
+
+Introduces entity annotations, spring-data based repositories and
+their incorporation into every service.
+
 ## Copyright
 
 Copyright Thomas Auinger (thomas@auinger.de), Germany. 
