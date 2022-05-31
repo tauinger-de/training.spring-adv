@@ -46,6 +46,12 @@ Introduces an unused OrderProperties holder class (which can be used instead of
 @Value annotations) and a StringToDoubleMapConverter
 implementation to parse the configuration string into a Map.
 
+### v070 - Transactions
+
+Makes use of the @Transactional annotation.
+
+Introduces an order-count at Customer level.
+
 ## Copyright
 
 Copyright Thomas Auinger (thomas@auinger.de), Germany. 
