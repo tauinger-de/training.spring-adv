@@ -1,44 +1,52 @@
-# Übung zu Kapitel "020 - Parent-POM, Starter"
+# Übung zu Kapitel "030 - Bean Definitions und Injection"
 
-## a) die Beispielanwendung
+## a) Erstellung der Address Klasse
 
-Schauen Sie sich den Source Code an der Anwendung hier im Projekt an.
+Erstellen Sie bitte eine POJO Model Klasse `com.example.pizza.customer.Address` 
+mit den folgenden Feldern:
+````
+String street;
+String postalCode;
+String city;
+````
+Sie können diese Klasse aus der Musterlösung (Branch 030) kopieren (z.B.
+durch das Compare Tool Ihrer IDE).
 
-## b) Anwendung starten
+## b) Erzeugung von Address Beans
 
-Starten Sie die Anwendung von der Kommandozeile
+Erstellen Sie bitte eine Bean Factory Klasse (mittels `@Configuration`) 
+`com.example.pizza.customer.AddressSetup`, die zwei benannte Beans vom Typ 
+`Address` erzeugt (mittels `@Bean` annotierten Methoden).
 
-````shell
-$ mvnw clean spring-boot:run
+## c) Erstellung der Customer Klasse
+
+Erstellen Sie bitte eine POJO Model Klasse `com.example.pizza.customer.Customer` 
+mit den folgenden Feldern:
+````
+Long id;
+String fullName;
+Address address;
+String phoneNumber;
+````
+Sie können auch diese Klasse aus der Musterlösung (Branch 030) kopieren (z.B.
+durch das Compare Tool Ihrer IDE).
+
+## d) Erstellung der CustomerService Klasse
+
+Erstellen Sie bitte eine `@Service` annotierte Klasse 
+`com.example.pizza.customer.CustomerService` mit zwei leeren Methoden:
+````
+public Customer createCustomer(Customer customer)
+public Iterable<Customer> getAllCustomers()
 ````
 
-Beenden Sie die Anwendung wieder (STRG+C) und starten Sie dann die Anwendung
-aus Ihrer Entwicklungsumgebung.
+Gerne können Sie diese (wie auch immer) mit Code füllen.
 
-Was passiert wohl beim Starten der Anwendung?
+## e) Erstellung einer CustomerSetup Klasse
 
-Warum erscheint die Ausgabe "Los geht's" so früh und die Ausgabe "Welcome" so spät?
+Erstellen Sie bitte eine `CustomerSetup` Klasse, die: 
 
-## c) Analyse spring-boot-starter JAR
-
-Welche Klassen sind in der spring-boot-starter JAR Datei enthalten?
-
-Und welchen Sinn hat dieses JAR?
-
-## d) Untersuchung der gebauten JAR
-
-Führen Sie einen Maven Build aus (`mvnw clean package`) und untersuchen Sie
-die resultierende JAR Datei im `/target` Verzeichnis (z.B. mit 7zip).
-
-## e) Optional: ein eigenes Projekt erstellen
-
-Gehen Sie auf die Seite https://start.spring.io/ und erstellen Sie mit dem 
-Spring Initializr ein neues Projekt.
-
-Gerne können Sie auch testweise Dependencies hinzufügen (z.B. "Web").
-
-Dann **Generate** klicken und geladene ZIP Datei entpacken und Inhalt untersuchen.
-Oder im Browser die generierten Dateien betrachten (und kopieren).
-
-PS Ggf. unterstützt Ihre IDE dies direkt (z.B. in Intellij: File > New > Project...)
-
+* mittels `@PostConstruct` 
+* und Nutzung der mittlerweile im Kontext existierenden `Address` Beans
+* zwei oder mehr `Customer` Instanzen anlegt 
+* und für diese die `createCustomer()` Methode des injizierten `CustomerService` aufruft
