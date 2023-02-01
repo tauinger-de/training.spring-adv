@@ -2,7 +2,7 @@
 
 ## a) Test-Driven-Development zur Abfrage eines Produkts
 
-Erstellen Sie eine `ProductServiceTest` Klasse mit der Testmethode 
+Erstellen Sie in der besstehenden `ProductServiceTest` Klasse eine Testmethode 
 `getProduct()`. 
 
 In diesem Test soll die Abfrage eines Produkts anhand der Methode `ProductService.getProduct()`
@@ -54,5 +54,6 @@ ja noch leer ist.
 
 Implementieren Sie dann die Service-Methode.
 
-Wie kann dieser Test implementiert werden, wenn man `@SpringBootTest` nicht nutzen möchte?
+Wie kann dieser Test implementiert werden, wenn man `@SpringBootTest` nicht nutzen möchte? Ändern
+Sie entsprechend die Annotationen der Klasse.
 
