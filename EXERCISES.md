@@ -27,3 +27,5 @@ Schreiben Sie einen Test
 der einen ungültigen Bestellvorgang auslöst und dann prüft, dass dennoch 
 der Zähler der Customer Entität erhöht wurde.
 
+Wie kann dieser Test implementiert werden, wenn man `@SpringBootTest` nicht nutzen möchte?
+
