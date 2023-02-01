@@ -5,13 +5,17 @@ import org.h2.tools.Server;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.sql.SQLException;
 
-@SpringBootTest
-@TestPropertySource(properties = {"spring.datasource.url = jdbc:h2:mem:testing"})
+@DataJpaTest(
+        properties = {"spring.datasource.url=jdbc:h2:mem:testing"},
+        showSql = false
+)
+// otherwise connection string is ignored:
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class CustomerRepositoryTest {
 
     @Autowired
