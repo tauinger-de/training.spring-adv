@@ -12,7 +12,7 @@ Starten Sie die Anwendung von der Kommandozeile
 $ mvnw clean spring-boot:run
 ````
 
-Beenden Sie die Anwendung wieder (STRG+C) und starten Sie dann die Anwendung
+Starten Sie dann die Anwendung
 aus Ihrer Entwicklungsumgebung.
 
 Was passiert wohl beim Starten der Anwendung?
