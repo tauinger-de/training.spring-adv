@@ -2,6 +2,7 @@ package com.example.pizza.order;
 
 import com.example.pizza.customer.Customer;
 import com.example.pizza.customer.CustomerRepository;
+import com.example.pizza.customer.CustomerService;
 import com.example.pizza.product.Product;
 import com.example.pizza.product.ProductRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -11,8 +12,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -22,8 +25,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import javax.transaction.Transactional;
 import java.util.Collections;
 
-@SpringBootTest
-@AutoConfigureMockMvc
+@WebMvcTest
+@ContextConfiguration(classes = {CustomerService.class, CustomerRepository.class})
 @Transactional
 @TestPropertySource(properties = {"app.order.daily-discounts={MONDAY:'10', TUESDAY:'10', WEDNESDAY:'10', THURSDAY:'10', FRIDAY:'10', SATURDAY:'10', SUNDAY:'10'}"})
 class OrderRestControllerTest {
