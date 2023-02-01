@@ -25,7 +25,7 @@ public class OrderService {
     Integer deliveryTimeInMinutes;
 
     @Value("#{${app.order.daily-discounts}}")
-    Map<String, Double> dailyDiscounts;
+    Map<String, Number> dailyDiscounts;
 
     //
     // injected beans
@@ -76,8 +76,8 @@ public class OrderService {
 
         // discounts
         String nameOfDayOfWeek = LocalDate.now().getDayOfWeek().name();
-        Double discountRate = this.dailyDiscounts.getOrDefault(nameOfDayOfWeek, 0.0);
-        Double discountedTotalPrice = totalPrice * (1.0 - discountRate / 100.0);
+        Number discountRate = this.dailyDiscounts.getOrDefault(nameOfDayOfWeek, 0.0);
+        Double discountedTotalPrice = totalPrice * (1.0 - discountRate.doubleValue() / 100.0);
         System.out.println("Reducing price of order from " + totalPrice + " to " + discountedTotalPrice
                 + " due to today's discount of " + discountRate + "%");
 
