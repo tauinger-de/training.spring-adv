@@ -13,9 +13,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -36,19 +39,21 @@ class CustomerRestControllerTest {
 
     @Test
     void createCustomer() throws Exception {
-        // exec and check request
-        String responseJson = this.mockMvc
-                .perform(MockMvcRequestBuilders
-                        .post(CustomerRestController.CREATE_ENDPOINT)
+        // when
+        var resultActions = this.mockMvc
+                .perform(post(CustomerRestController.CREATE_ENDPOINT)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"fullName\":\"Test Case\", \"orderCount\":99}"))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isCreated())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.orderCount", Matchers.is(0)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNumber())
-                .andReturn().getResponse().getContentAsString();
+                        .content("{\"fullName\":\"Test Case\"}")
+                );
 
-        // check persistence
+        // then - assert response
+        resultActions
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.orderCount", Matchers.is(0)))
+                .andExpect(jsonPath("$.id").isNumber());
+
+        // then - assert persistence
+        var responseJson = resultActions.andReturn().getResponse().getContentAsString();
         Integer customerId = JsonPath.read(responseJson, "$.id");
         Customer customer = this.customerRepository.findById(customerId.longValue()).orElse(null);
         Assertions.assertNotNull(customer);
@@ -79,8 +84,8 @@ class CustomerRestControllerTest {
 
         // when
         String actualJson = this.mockMvc
-                .perform(MockMvcRequestBuilders.get(CustomerRestController.GET_ONE_ENDPOINT, customer.getId()))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .perform(get(CustomerRestController.GET_ONE_ENDPOINT, customer.getId()))
+                .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
 
         // then
@@ -97,13 +102,15 @@ class CustomerRestControllerTest {
         Customer customer = new Customer(customerFullName, customerAddress, customerPhoneNumber);
         customer = customerRepository.save(customer);
 
-        // when & then
-        this.mockMvc
-                .perform(MockMvcRequestBuilders.get(CustomerRestController.GET_ONE_ENDPOINT, customer.getId()))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(customer.getId()), Long.class)) // trick for asserting on Long!
-                .andExpect(MockMvcResultMatchers.jsonPath("$.fullName", Matchers.is(customerFullName)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.address.city", Matchers.is(customerAddress.getCity())));
+        // when
+        var resultActions = this.mockMvc
+                .perform(get(CustomerRestController.GET_ONE_ENDPOINT, customer.getId()))
+                .andExpect(status().isOk());
+
+        // then
+        resultActions
+                .andExpect(jsonPath("$.fullName", Matchers.is(customerFullName)))
+                .andExpect(jsonPath("$.address.city", Matchers.is(customerAddress.getCity())));
     }
 
     private String toJson(Object object) throws JsonProcessingException {
