@@ -54,3 +54,5 @@ ja noch leer ist.
 
 Implementieren Sie dann die Service-Methode.
 
+Wie kann dieser Test implementiert werden, wenn man `@SpringBootTest` nicht nutzen möchte?
+
