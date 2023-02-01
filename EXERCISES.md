@@ -387,6 +387,16 @@ Schreiben Sie einen `OrderRestControllerTest` für placeOrder(), der das erfolgr
 Anlegen einer Bestellung inklusive Prüfung auf korrekten Gesamtpreis und Name des 
 Empfängers validiert.
 
+Versuchen Sie diesen Test nicht als `@SpringBootTest`, sondern mit der Variante `@WebMvcTest`
+zu schreiben, sodass nur ein Teil des Kontexts gestartet werden muss (schneller).
+
+Da wir ja einen vollständigen Integrationstest möchten, muss also trotz des Slicings auf Web-Komponenten
+hin auch zusätzlich noch die entsprechenden Services und Repositories angelegt werden. 
+Dazu brauchen Sie einige andere Annotationen, wie z.B.
+* `@Import`
+* `@AutoConfigureDataJpa`
+* `@EnableJpaRepositories`
+
 Optional kann noch ein Negativtest geschrieben werden, der das Verhalten bei 
 Angabe einer falschen Kunden-Telefonnummer oder Produkt-Id prüft.
 
