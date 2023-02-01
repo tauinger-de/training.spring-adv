@@ -33,6 +33,8 @@ public class CustomerRepositoryTest {
 
     @Test
     void queryCustomersByPhoneNumberPrefix() {
+        // THIS DOESN'T WORK ANYMORE - @DataJpaTest is @transactional -- nothing is written!
+
         // if you want to access the h2 web console:
         // - set a THREAD-ONLY breakpoint anywhere below this line
         // - access the h2 console at http://localhost:8082 using the DB-URL configured at class level (default username and pwd)
