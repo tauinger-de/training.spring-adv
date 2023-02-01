@@ -10,7 +10,7 @@ den fehlenden Code.
 
 ## b) Pom.xml erweitern
 
-Fügen sie den JPA Starter und die H2 Dependency der pom.xml hinzu.
+Fügen Sie den JPA Starter und die H2 Dependency der pom.xml hinzu.
 
 Ggf. müssen Sie die Maven-Projektkonfiguration in Ihrer IDE aktualisieren.
 
