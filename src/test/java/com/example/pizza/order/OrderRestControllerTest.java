@@ -5,17 +5,18 @@ import com.example.pizza.customer.CustomerRepository;
 import com.example.pizza.customer.CustomerService;
 import com.example.pizza.product.Product;
 import com.example.pizza.product.ProductRepository;
+import com.example.pizza.product.ProductService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -25,10 +26,12 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import javax.transaction.Transactional;
 import java.util.Collections;
 
-@WebMvcTest
-@ContextConfiguration(classes = {CustomerService.class, CustomerRepository.class})
-@Transactional
+@WebMvcTest(OrderRestController.class)
+@Import({OrderService.class, CustomerService.class, ProductService.class})
+@AutoConfigureDataJpa
+@EnableJpaRepositories(basePackageClasses = {CustomerRepository.class, ProductRepository.class, OrderRepository.class})
 @TestPropertySource(properties = {"app.order.daily-discounts={MONDAY:'10', TUESDAY:'10', WEDNESDAY:'10', THURSDAY:'10', FRIDAY:'10', SATURDAY:'10', SUNDAY:'10'}"})
+@Transactional // todo required due to @BeforeEach setup, but why exactly?
 class OrderRestControllerTest {
 
     @Autowired
