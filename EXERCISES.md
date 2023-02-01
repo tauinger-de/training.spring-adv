@@ -1,31 +1,59 @@
-# Übung zu Kapitel "070 - Transaktionen"
+# Übung zu Kapitel "040 - Testing"
 
-## a) Customer um "orderCount" erweitern
+## a) Test-Driven-Development zur Abfrage eines Produkts
 
-Fügen Sie einen Counter (Zählwert) im Customer namens `orderCount` ein – 
-die Getter-Methode dafür bitte nicht vergessen.
+Erstellen Sie in der besstehenden `ProductServiceTest` Klasse eine Testmethode 
+`getProduct()`. 
 
-Dies ist ein Zähler für die Anzahl **versuchter** (nicht unbedingt erfolgreicher) Bestellungen.
+In diesem Test soll die Abfrage eines Produkts anhand der Methode `ProductService.getProduct()`
+getestet werden.
 
-## b) CustomerService erweitern
+Der Test soll mittels der `ProductService.createProduct()` 
+Methode die benötigten Testdaten selbst anlegen.
 
-Fügen Sie eine neue Methode 
-`com.example.pizza.customer.CustomerService#increaseOrderCount()` ein, die in einer 
-neuen Transaktion den Zähler hochsetzt und den neuen Wert persistiert.
+Hinweise:
+* Im Sinne des TDD legen wir den Test vor der tatsächlichen Implementierung an -- und können diesen zum 
+Debuggen des neuen Source-Codes nutzen
+* Anfänglich wird der Test natürlich fehlschlagen
+* In den unten folgenden Übungen werden weitere Code-Teile erstellt – bitte machen Sie pro Übung nicht zu viel
 
-## c) OrderService erweitern
+## b) Interface ProductRepository
 
-Rufen Sie die neue Methode im `CustomerService` aus `OrderService#placeOrder()` auf,  
-und zwar gleich, nachdem der Customer geladen wurde.
+Legen Sie ein leeres `com.example.pizza.product.ProductRepository` Interface 
+an und injizieren Sie dieses in den `ProductService`.
 
-Außerdem soll die `placeOrder()` Methode auch in einer Transaktion ablaufen.
+## c) Nutzung ProductRepository
 
-## d) Test
+Füllen Sie die Geschäftslogik im `ProductService` mit Code, der das `ProductRepository` nutzt.
 
-Schreiben Sie einen Test 
-`com.example.pizza.order.OrderServiceTest#placeOrder_customerOrderCountIncreasesDespiteTransactionFail()` 
-der einen ungültigen Bestellvorgang auslöst und dann prüft, dass dennoch 
-der Zähler der Customer Entität erhöht wurde.
+Dafür müssen Sie neue Methoden in dem `ProductRepository` anlegen.
 
-Wie kann dieser Test implementiert werden, wenn man `@SpringBootTest` nicht nutzen möchte?
+## d) Implementation InMemoryProductRepository
+
+Erstellen Sie eine `ProductRepository` Implementation mit Namen 
+`InMemoryProductRepository`, die intern mit einer `HashMap` zur Datenhaltung 
+arbeitet.
+
+Hinweis: Ihr Test soll jetzt erfolgreich durchlaufen.
+
+## e) Bestehenden Testfall aktivieren
+
+Aktivieren Sie den Testfall 
+`ProductServiceTest.createProduct_failsForDuplicateProductId()` und schauen 
+Sie, dass dieser erfolgreich läuft.
+
+## f) Test-Driven-Development von getTotalPrice()
+
+Schauen Sie sich die Signatur der Service-Methode `ProductService.getTotalPrice()` 
+an – welchen Wert soll diese wohl auf Basis der Eingabeparameter zurückgeben?
+
+Vervollständigen Sie den Testfall `ProductServiceTest_WithMocks.getTotalPrice()` 
+sodass dieser mithilfe eines gemockten Repositories die Geschäftslogik zur 
+Preisberechnung prüft – dieser Test wird vorerst fehlschlagen, da die Service-Methode 
+ja noch leer ist.
+
+Implementieren Sie dann die Service-Methode.
+
+Wie kann dieser Test implementiert werden, wenn man `@SpringBootTest` nicht nutzen möchte? Ändern
+Sie entsprechend die Annotationen der Klasse.
 
