@@ -3,7 +3,7 @@
 ## a) Test-Driven-Development der Speicherung eines Kunden
 
 Schreiben Sie einen Testfall, der die erfolgreiche Persistierung einer `Customer` Entität
-(inkl. Address) mittels des `CustomerService` prüft.
+(inkl. `Address`) mittels des `CustomerService` prüft.
 
 Dieser Testfall wird vorerst fehlschlagen – die nachfolgenden Übungen liefern dann 
 den fehlenden Code.
@@ -35,7 +35,8 @@ Verändern Sie alle drei Services so, dass diese nun mit den Repositories arbeit
 Schreiben Sie eine Methode in das `CustomerRepository`, welches einen oder mehrere 
 Kunden anhand des Präfixes ihrer Telefonnummer findet.
 
-Erstellen Sie eine Klasse `CustomerRepositoryTest`, in der diese Methode getestet wird.
+Erstellen Sie eine Klasse `CustomerRepositoryTest`, in der diese Methode getestet wird. Nutzen Sie
+die `@DataJpaTest` Annotation für diese Testklasse (anstatt `@SpringBootTest`).
 
 Beispiel: Bei Suche nach "123" werden alle Kunden gefunden, deren Telefonnummer 
 mit "123" anfängt
