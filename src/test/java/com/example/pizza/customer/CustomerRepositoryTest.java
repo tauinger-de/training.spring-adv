@@ -1,5 +1,6 @@
 package com.example.pizza.customer;
 
+import com.example.pizza.xtras.StringToDoubleMapConverter;
 import org.assertj.core.api.Assertions;
 import org.h2.tools.Server;
 import org.junit.jupiter.api.BeforeAll;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.context.annotation.Import;
 
 import java.sql.SQLException;
 
@@ -15,6 +17,8 @@ import java.sql.SQLException;
         properties = {"spring.datasource.url=jdbc:h2:mem:testing"},
         showSql = false
 )
+// include converter which is not scanned by default when using @DataJpaTest
+@Import(StringToDoubleMapConverter.class)
 // otherwise connection string is ignored:
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class CustomerRepositoryTest {
