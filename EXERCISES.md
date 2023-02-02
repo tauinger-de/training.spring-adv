@@ -35,6 +35,8 @@ Aktivieren Sie Monitoring für die Anwendung, sodass folgende Endpunkte im Brows
 Aktivieren Sie die Detail-Anzeige des Health-Monitorings:
 `management.endpoint.health.show-details=always`
 
+Die Health-Informationen können Sie auf http://localhost:8080/actuator/health abrufen.
+
 Schreiben Sie dann eine Bean, die `HealthIndicator` implementiert. Diese soll das System als
 DOWN bewerten, wenn keine bestellbaren Produkte vorhanden sind.
 
