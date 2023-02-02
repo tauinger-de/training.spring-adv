@@ -30,7 +30,18 @@ Aktivieren Sie Monitoring für die Anwendung, sodass folgende Endpunkte im Brows
 * info
 * env
 
-## e) Erweiterung Health Monitoring
+## e) Build Infos
+
+Sie können den Maven Build so erweitern, dass die Datei `META-INF/build-info.properties`
+generiert wird.
+
+Diese wird dann von Springs `BuildInfoContributor` ausgelesen und als Teil des "info" Monitoring
+Endpoints angezeigt -- sehr praktisch, wenn man wissen will, welcher Commit tatsächlich deployt ist.
+
+Da diese Datei vom Maven Build-Prozess generiert wird, funktioniert es nicht, wenn man direkt von
+der IDE aus startet.
+
+## f) Erweiterung Health Monitoring
 
 Aktivieren Sie die Detail-Anzeige des Health-Monitorings:
 `management.endpoint.health.show-details=always`
@@ -43,7 +54,7 @@ DOWN bewerten, wenn keine bestellbaren Produkte vorhanden sind.
 Durch ein zusätzliches Property können Sie dann bspw. den Produkt-Setup deaktivieren und schauen,
 dass nun ohne Produkte der System-Gesamtzustand ebenfalls als DOWN bewertet wird.
 
-## f) Metrics
+## g) Metrics
 
 Stellen Sie Prometheus Micrometer Metriken über Einbindung der entsprechenden Dependencies
 zur Verfügung.
