@@ -1,69 +1,54 @@
-# Übung zu Kapitel "100 - Profile, Logging und Monitoring"
+# Übung zu Kapitel "080 - RESTful API"
 
-## a) "Nur Customer” Profil
+## a) Insomnia Rest Client
 
-Markieren Sie alle relevanten Beans mit `@Profile` Annotationen, sodass bei Aufruf 
-der Anwendung mit dem Profil "customer" nur die Funktionalität des Customer-Moduls 
-zur Verfügung steht.
+Bei Bedarf können Sie den "Insomnia Core" Rest Client installieren: https://insomnia.rest/
 
-Gerne können Sie auch die Übung so weit treiben, dass die folgenden Profile zur Auswahl 
-stehen und die Anwendung bei jedem der Profile lauffähig ist:
-* "product"
-* "customer"
-* "order"
-* kein Profil gesetzt
+Im Branch 080 ist ein exportierter Insomnia Workspace vorhanden, den Sie in das Tool importieren können. 
+Oder Sie legen die wenigen Requests selbst an.
 
-## b) “Dev” Profil
+Alternativ können Sie zum Testen der Endpunkte natürlich auch Postman oder den 
+Kommandozeilenbefehl curl nehmen.
 
-Legen Sie eine Konfigurationsdatei für das Profil "dev" an, bei dem vermehrt 
-Logging Ausgaben generiert werden, z.B. Logging-Level aller "pizza" Klassen auf DEBUG.
+## b) pom.xml erweitern
 
-## c) System.out durch Logging
+Fügen Sie den notwendigen Starter der `pom.xml` hinzu
 
-Ersetzen Sie Ausgaben in der Anwendung, die bisher per System.out.println() erfolgt sind, 
-durch Logging Ausgaben.
+## c) OrderRestController
 
-## d) Monitoring aktivieren
+Erstellen Sie einen API-Endpunkt `/orders/greeting` der für ein GET 
+eine Begrüßung als String zurückgibt.
 
-Aktivieren Sie Monitoring für die Anwendung, sodass folgende Endpunkte im Browser abrufbar sind:
-* health
-* info
-* env
+Testen Sie die URL in Ihrem Browser: http://localhost:8080/orders/greeting
 
-## e) Build Infos
+## d) CustomerRestController
 
-Sie können den Maven Build so erweitern, dass die Datei `META-INF/build-info.properties`
-generiert wird.
+Erstellen Sie die folgenden API-Endpunkte:
 
-Diese wird dann von Springs `BuildInfoContributor` ausgelesen und als Teil des "info" Monitoring
-Endpoints angezeigt -- sehr praktisch, wenn man wissen will, welcher Commit tatsächlich deployt ist.
+* `GET /customers`, der alle Kunden zurückgibt
+* `POST /customers`, der einen neuen Kunden anlegt
 
-Da diese Datei vom Maven Build-Prozess generiert wird, funktioniert es nicht, wenn man direkt von
-der IDE aus startet.
+## e) ProductRestController
 
-## f) Erweiterung Health Monitoring
+Erstellen Sie die folgenden API-Endpunkte:
 
-Aktivieren Sie die Detail-Anzeige des Health-Monitorings:
-`management.endpoint.health.show-details=always`
+* `GET /products`, der alle Produkte zurückgibt
 
-Die Health-Informationen können Sie auf http://localhost:8080/actuator/health abrufen.
+## f) Erweiterung OrderRestController
 
-Schreiben Sie dann eine Bean, die `HealthIndicator` implementiert. Diese soll das System als
-DOWN bewerten, wenn keine bestellbaren Produkte vorhanden sind.
+Erstellen Sie zusätzlich die folgenden API-Endpunkte:
 
-Durch ein zusätzliches Property können Sie dann bspw. den Produkt-Setup deaktivieren und schauen,
-dass nun ohne Produkte der System-Gesamtzustand ebenfalls als DOWN bewertet wird.
-
-## g) Metrics
-
-Stellen Sie Prometheus Micrometer Metriken über Einbindung der entsprechenden Dependencies
-zur Verfügung.
-
-Rufen Sie die Metriken über die entsprechende URL im Browser oder sonstigem Client ab.
-
-Sie können dann Prometheus via Docker starten und entsprechend konfigurieren, dass Metriken
-Ihrer Applikaton von Prometheus gescrapet werden.
-
-Eine Anleitung für alle obigen Themen finden Sie u.a. hier:
-https://medium.com/@nikhilsrivastava13/monitoring-in-spring-boot-using-micrometer-and-prometheus-667c6f2a625f
+* `GET /orders`, der alle Bestellungen zurückgibt
+* `POST /orders`, durch den eine neue Bestellung aufgegeben werden kann. Die Bestellung ist durch 
+folgenden JSON Inhalt definiert:
+````json
+{
+    "phoneNumber": "123-4567",
+    "itemQuantities": {
+        "S-02": 1,
+        "P-10": 2,
+        "P-12": 1
+    }
+}
+````
 
