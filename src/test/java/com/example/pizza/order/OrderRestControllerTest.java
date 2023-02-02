@@ -57,15 +57,15 @@ class OrderRestControllerTest {
 
     @Test
     void placeOrder() throws Exception {
-        IncomingOrderDto incomingOrderDto = new IncomingOrderDto();
-        incomingOrderDto.phoneNumber = "040-112233";
-        incomingOrderDto.itemQuantities = Collections.singletonMap("p1", 2);
+        OrderRequestData orderRequestData = new OrderRequestData();
+        orderRequestData.phoneNumber = "040-112233";
+        orderRequestData.itemQuantities = Collections.singletonMap("p1", 2);
 
         this.mockMvc
                 .perform(MockMvcRequestBuilders
                         .post(OrderRestController.PLACE_ORDER_ENDPOINT)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(toJson(incomingOrderDto)))
+                        .content(toJson(orderRequestData)))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.totalPrice", Matchers.is(1.8)))
