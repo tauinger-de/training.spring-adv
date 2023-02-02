@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -47,12 +48,12 @@ public class OrderService {
             CustomerService customerService,
             ProductService productService,
             OrderRepository orderRepository,
-            @Qualifier("greeting") String greeting
+            @Qualifier("greeting") Optional<String> greeting
     ) {
         this.customerService = customerService;
         this.productService = productService;
         this.orderRepository = orderRepository;
-        this.greeting = greeting;
+        this.greeting = greeting.orElse("");
     }
 
     @PostConstruct
