@@ -50,10 +50,10 @@ public class OrderRestController {
 
     @PostMapping(PLACE_ORDER_ENDPOINT)
     @ResponseStatus(HttpStatus.CREATED)
-    public Order placeOrder(@RequestBody IncomingOrderDto incomingOrderDto) {
+    public Order placeOrder(@RequestBody OrderRequestData orderRequestData) {
         return this.orderService.placeOrder(
-                incomingOrderDto.phoneNumber,
-                incomingOrderDto.itemQuantities);
+                orderRequestData.phoneNumber,
+                orderRequestData.itemQuantities);
     }
 
     @GetMapping(GET_MANY_ENDPOINT)

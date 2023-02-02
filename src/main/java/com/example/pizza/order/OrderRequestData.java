@@ -2,7 +2,7 @@ package com.example.pizza.order;
 
 import java.util.Map;
 
-public class IncomingOrderDto {
+public class OrderRequestData {
 
     public String phoneNumber;
 
@@ -10,7 +10,7 @@ public class IncomingOrderDto {
 
     @Override
     public String toString() {
-        return "IncomingOrderDto{" +
+        return "OrderRequestData{" +
                 "phoneNumber='" + phoneNumber + '\'' +
                 ", itemQuantities=" + itemQuantities +
                 '}';
