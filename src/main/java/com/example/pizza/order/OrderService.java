@@ -17,6 +17,7 @@ import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @Profile("default | order")
@@ -37,7 +38,7 @@ public class OrderService {
     Integer deliveryTimeInMinutes;
 
     @Value("#{${app.order.daily-discounts}}")
-    Map<String, Double> dailyDiscounts;
+    Map<String, Number> dailyDiscounts;
 
     //
     // injected beans
@@ -59,12 +60,12 @@ public class OrderService {
             CustomerService customerService,
             ProductService productService,
             OrderRepository orderRepository,
-            @Qualifier("greeting") String greeting
+            @Qualifier("greeting") Optional<String> greeting
     ) {
         this.customerService = customerService;
         this.productService = productService;
         this.orderRepository = orderRepository;
-        this.greeting = greeting;
+        this.greeting = greeting.orElse("");
     }
 
     @PostConstruct
@@ -92,9 +93,10 @@ public class OrderService {
 
         // discounts
         String nameOfDayOfWeek = LocalDate.now().getDayOfWeek().name();
-        Double discountRate = this.dailyDiscounts.getOrDefault(nameOfDayOfWeek, 0.0);
-        Double discountedTotalPrice = totalPrice * (1.0 - discountRate / 100.0);
-        LOG.debug("Reducing price of order from {} to {} due to today's discount of {}%", totalPrice, discountedTotalPrice, discountRate);
+        Number discountRate = this.dailyDiscounts.getOrDefault(nameOfDayOfWeek, 0.0);
+        Double discountedTotalPrice = totalPrice * (1.0 - discountRate.doubleValue() / 100.0);
+        System.out.println("Reducing price of order from " + totalPrice + " to " + discountedTotalPrice
+                + " due to today's discount of " + discountRate + "%");
 
         // create order
         Order order = new Order(

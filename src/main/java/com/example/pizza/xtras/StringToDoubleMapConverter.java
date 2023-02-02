@@ -1,32 +1,31 @@
 package com.example.pizza.xtras;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
+import org.springframework.core.convert.ConversionException;
+import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.expression.EvaluationException;
+import org.springframework.expression.ParseException;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @Component
 @ConfigurationPropertiesBinding
-public class StringToDoubleMapConverter implements Converter<String, Map<String,Double>> {
+public class StringToDoubleMapConverter implements Converter<String, Map<String, Number>> {
+
+    public static Logger LOG = LoggerFactory.getLogger(StringToDoubleMapConverter.class);
 
     @Override
-    public Map<String,Double> convert(String from) {
-        Map<String,Double> result = new HashMap<>();
-        from = StringUtils.trimLeadingCharacter(from, '{');
-        from = StringUtils.trimTrailingCharacter(from, '}');
-        String[] data = from.split(",");
-        for (String entry : data) {
-            String[] keyValue = entry.split(":");
-            if (keyValue.length == 2) {
-                String doubleStr = keyValue[1];
-                doubleStr = StringUtils.trimLeadingCharacter(doubleStr, '\'');
-                doubleStr = StringUtils.trimTrailingCharacter(doubleStr, '\'');
-                result.put(keyValue[0], Double.parseDouble(doubleStr));
-            }
+    public Map<String, Number> convert(String from) {
+        try {
+            return (Map<String, Number>) new SpelExpressionParser().parseRaw(from).getValue(Map.class);
+        } catch (EvaluationException | ParseException | ClassCastException e) {
+            LOG.warn("Failed to convert input: " + e.getMessage());
+            throw e;
         }
-        return result;
     }
 }
