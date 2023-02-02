@@ -1,42 +1,51 @@
-# Übung zu Kapitel "050 - Spring Data JPA"
+# Übung zu Kapitel "090 - API Integrations-Tests"
 
-## a) Test-Driven-Development der Speicherung eines Kunden
+## a) CustomerRestControllerTest - getCustomer
 
-Schreiben Sie einen Testfall, der die erfolgreiche Persistierung einer `Customer` Entität
-(inkl. `Address`) mittels des `CustomerService` prüft.
+Test-Driven-Development: Schreiben Sie einen `CustomerRestControllerTest`, der die 
+Abfrage (Lesen) eines einzelnen Kunden anhand dessen Id durchführt.
 
-Dieser Testfall wird vorerst fehlschlagen – die nachfolgenden Übungen liefern dann 
-den fehlenden Code.
+Dieser Test soll die JSON Antwort zumindest zu Teilen auf Korrektheit prüfen.
 
-## b) Pom.xml erweitern
+Da es den Endpunkt hierfür noch nicht gibt, wird dieser Test vorerst fehlschlagen.
 
-Fügen Sie den JPA Starter und die H2 Dependency der pom.xml hinzu.
+## b) Erweiterung CustomerService
 
-Ggf. müssen Sie die Maven-Projektkonfiguration in Ihrer IDE aktualisieren.
+Erweitern Sie den `CustomerService` um eine `getCustomer(long id)` Methode, 
+die ebenfalls eine Exception (welche wohl?) wirft, wenn der Kunde nicht existiert.
 
-## c) Entities & Repositories
+## c) Erweiterung CustomerRestController
 
-Versehen Sie die Entitäten `Order`, `Product`, `Customer` und `Address` mit den benötigten 
-Annotationen. 
+Erweitern Sie den `CustomerRestController` um einen Endpunkt für die neue 
+Service-Methode.
 
-Bitte folgende Spezialfälle berücksichtigen:
-* Die Bestellungen sollen in der Tabelle "orders" hinterlegt sein 
-(Warum geht wohl nur "order" nicht?)
-* Ein Kunde hat seine Telefonnummer in der Spalte "phone" hinterlegt 
- 
-Legen Sie dann die benötigten Repositories für `Order`, `Product` und `Customer` an.
+Der TDD Test sollte nun erfolgreich durchlaufen.
 
-## d) Repositories nutzen
+## d) CustomerRestControllerTest - createCustomer
 
-Verändern Sie alle drei Services so, dass diese nun mit den Repositories arbeiten.
+Ergänzen Sie den `CustomerRestControllerTest` um einen Testfall, der die 
+korrekte Anlage eines neuen Kunden prüft.
 
-## e) Custom Queries
+Die Prüfung kann nur aus Abfrage des richtigen Statuswerts (201-CREATED) bestehen.
 
-Schreiben Sie eine Methode in das `CustomerRepository`, welches einen oder mehrere 
-Kunden anhand des Präfixes ihrer Telefonnummer findet.
+## e) OrderRestControllerTest
 
-Erstellen Sie eine Klasse `CustomerRepositoryTest`, in der diese Methode getestet wird. Nutzen Sie
-die `@DataJpaTest` Annotation für diese Testklasse (anstatt `@SpringBootTest`).
+Schreiben Sie einen `OrderRestControllerTest` für placeOrder(), der das erfolgreiche 
+Anlegen einer Bestellung inklusive Prüfung auf korrekten Gesamtpreis und Name des 
+Empfängers validiert.
 
-Beispiel: Bei Suche nach "123" werden alle Kunden gefunden, deren Telefonnummer 
-mit "123" anfängt
+Versuchen Sie diesen Test nicht als `@SpringBootTest`, sondern mit der Variante `@WebMvcTest`
+zu schreiben, sodass nur ein Teil des Kontexts gestartet werden muss (schneller).
+
+Da wir ja einen vollständigen Integrationstest möchten, muss also trotz des Slicings auf Web-Komponenten
+hin auch zusätzlich noch die entsprechenden Services und Repositories angelegt werden. 
+Dazu brauchen Sie einige andere Annotationen, wie z.B.
+* `@Import`
+* `@AutoConfigureDataJpa`
+* `@EnableJpaRepositories`
+
+Optional kann noch ein Negativtest geschrieben werden, der das Verhalten bei 
+Angabe einer falschen Kunden-Telefonnummer oder Produkt-Id prüft.
+
+
+
