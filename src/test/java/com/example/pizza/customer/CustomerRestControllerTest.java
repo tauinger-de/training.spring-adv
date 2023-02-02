@@ -66,11 +66,14 @@ class CustomerRestControllerTest {
     @Test
     void getCustomer_notFound() throws Exception {
         // when
-        this.mockMvc
-                .perform(MockMvcRequestBuilders.get(CustomerRestController.GET_ONE_ENDPOINT, Integer.MIN_VALUE))
-                .andExpect(MockMvcResultMatchers.status().isNotFound())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is(HttpStatus.NOT_FOUND.name())))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.type", Matchers.is(CustomerNotFoundException.class.getSimpleName())));
+        var resultActions = this.mockMvc
+                .perform(get(CustomerRestController.GET_ONE_ENDPOINT, Integer.MIN_VALUE));
+
+        // then
+        resultActions
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.status", Matchers.is(HttpStatus.NOT_FOUND.name())))
+                .andExpect(jsonPath("$.type", Matchers.is(CustomerNotFoundException.class.getSimpleName())));
     }
 
     /**
