@@ -4,6 +4,7 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.AbstractHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
@@ -12,6 +13,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class ProductRequestDataCsvConverter extends AbstractHttpMessageConverter<List<ProductRequestData>> {
+
+    public ProductRequestDataCsvConverter() {
+        super(MediaType.valueOf("text/csv"));
+    }
 
     @Override
     protected boolean supports(Class<?> clazz) {
@@ -28,11 +33,10 @@ public class ProductRequestDataCsvConverter extends AbstractHttpMessageConverter
                 .withHeader()
                 .withStrictHeaders(true)
                 .withColumnSeparator(',');
-        List<ProductRequestData> items = csvMapper.readerFor(ProductRequestData.class)
+        return csvMapper.readerFor(ProductRequestData.class)
                 .with(schema)
                 .<ProductRequestData>readValues(inputMessage.getBody())
                 .readAll();
-        return items;
     }
 
     @Override
