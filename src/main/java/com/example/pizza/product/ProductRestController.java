@@ -43,9 +43,8 @@ public class ProductRestController {
         return this.productService.getAllProducts();
     }
 
-    @PutMapping(value = UPLOAD_CSV_ENDPOINT,
-            consumes = "text/csv")
-    public void uploadProducts(List<Product> products) {
+    @PutMapping(value = UPLOAD_CSV_ENDPOINT, consumes = "text/csv")
+    public void uploadProducts(List<ProductRequestData> products) {
         // todo
     }
 }
