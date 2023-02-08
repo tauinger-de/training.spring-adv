@@ -1,4 +1,4 @@
-# Übung zu Kapitel "100 - Profile, Logging und Monitoring"
+# Übungen zum aktuellen Kapitel "100 - Profile, Logging und Monitoring"
 
 ### a) "Nur Customer” Profil
 
@@ -31,7 +31,7 @@ Aktivieren Sie Monitoring für die Anwendung, sodass folgende Endpunkte im Brows
 * env
 
 
-## 110 - AOP
+## Übungen zum nächsten Kapitel "110 - AOP"
 
 ### a) Logging Aspect
 
