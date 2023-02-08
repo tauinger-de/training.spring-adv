@@ -45,7 +45,7 @@ public class CustomerRestController {
     //
 
     @GetMapping(GET_ONE_ENDPOINT)
-    public Customer getCustomer(@PathVariable long id) {
+    public Customer getCustomer(@PathVariable long id) throws CustomerNotFoundException {
         return this.customerService.getCustomer(id);
     }
 
