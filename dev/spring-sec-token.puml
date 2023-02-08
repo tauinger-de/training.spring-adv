@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/class-diagram
+package java.security {
+    interface Principal {}
+}
+
+package org.springframework.security.core #f6fafd {
+    interface Authentication {
+    + getPrincipal() : Object
+    + getCredentials() : Object
+    }
+    interface GrantedAuthority {
+    + getAuthority() : String
+    }
+    abstract class AbstractAuthenticationToken {
+    - authorities : Collection<GrantedAuthority>
+    - authenticated : boolean
+    + getAuthorities() : Collection<GrantedAuthority>
+    + isAuthenticated() : boolean
+    }
+    class UsernamePasswordAuthenticationToken {
+    - principal : Object
+    - credentials : Object
+    + getPrincipal() : Object
+    + getCredentials() : Object
+    }
+    Authentication -left-|> Principal
+    AbstractAuthenticationToken -up-|> Authentication
+    AbstractAuthenticationToken -left-> GrantedAuthority
+    UsernamePasswordAuthenticationToken -up-|> AbstractAuthenticationToken
+}
+
+'package org.springframework.security.oauth2.server.resource #fafdfa {
+'    class BearerTokenAuthenticationToken {
+'    - token : String
+'    + getToken() : String
+'    }
+'    BearerTokenAuthenticationToken -up-|> AbstractAuthenticationToken
+'}
+
+@enduml

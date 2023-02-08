@@ -1,8 +1,3 @@
-@EnableWebSecurity -- deaktiviert Standard und ersetzt durch eigene
-
-WebSecurityConfigurerAdapter -- util Klasse zum Bauen eines WebSecurityConfigurer
-
-
 io.jsonwebtoken.Jwts.parserBuilder().setSigningKey(sessionAuthPublicKey).build();
 
 
@@ -10,18 +5,6 @@ GenericFilterBean
 --> AbstractPreAuthenticatedProcessingFilter
     --> custom.PreAuthenticationFilter
 
-
-AuthenticationManager
--> ProviderManager
-
-
-AuthenticationProvider
--> PreAuthenticatedAuthenticationProvider
-
-
-
-AuthenticationUserDetailsService
--> own impl
 
 
 AuthenticationEntryPoint ???

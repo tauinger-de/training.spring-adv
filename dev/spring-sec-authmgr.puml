@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package o.s.security.authentication {
+
+    interface AuthenticationManager {
+    + authenticate(Authentication) : Authentication
+    }
+
+    class ProviderManager {
+    - providers : List<AuthenticationProvider>
+    }
+
+    interface AuthenticationProvider {
+    + authenticate(Authentication) : Authentication
+    }
+
+    abstract class AbstractUserDetailsAuthenticationProvider {
+    }
+    class DaoAuthenticationProvider {
+    - userDetailsService : UserDetailsService
+    - passwordEncoder : PasswordEncoder
+    }
+
+    ProviderManager -up-|> AuthenticationManager
+    ProviderManager -right-> AuthenticationProvider
+    AbstractUserDetailsAuthenticationProvider -up-|> AuthenticationProvider
+    DaoAuthenticationProvider -up-|> AbstractUserDetailsAuthenticationProvider
+}
+
+'package o.s.security.oauth2 {
+'
+'    class Jwt {
+'    - headers : Map<String, Object>
+'    - claims : Map<String, Object>
+'    }
+'
+'    class JwtAuthenticationProvider {
+'    - jwtDecoder : JwtDecoder
+'    - getJwt(BearerTokenAuthenticationToken) : Jwt
+'    }
+'
+'    JwtAuthenticationProvider  -up-|> AuthenticationProvider
+'
+'}
+
+@enduml

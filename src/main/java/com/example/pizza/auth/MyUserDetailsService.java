@@ -20,7 +20,7 @@ public class MyUserDetailsService implements UserDetailsService {
                 username,
                 pwd,
                 List.of(
-//                        new SimpleGrantedAuthority("gast"),
+                        new SimpleGrantedAuthority("gast"),
                         new SimpleGrantedAuthority("ROLE_USER")
                 )
         );
