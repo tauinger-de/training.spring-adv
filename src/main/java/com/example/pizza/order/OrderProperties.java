@@ -10,9 +10,9 @@ import java.util.Map;
 public class OrderProperties {
 
     private final Integer deliveryTimeInMinutes;
-    private final Map<String, Double> dailyDiscounts;
+    private final Map<String, Number> dailyDiscounts;
 
-    public OrderProperties(Integer deliveryTimeInMinutes, Map<String, Double> dailyDiscounts) {
+    public OrderProperties(Integer deliveryTimeInMinutes, Map<String, Number> dailyDiscounts) {
         this.deliveryTimeInMinutes = deliveryTimeInMinutes;
         this.dailyDiscounts = dailyDiscounts;
     }
@@ -21,7 +21,7 @@ public class OrderProperties {
         return deliveryTimeInMinutes;
     }
 
-    public Map<String, Double> getDailyDiscounts() {
+    public Map<String, Number> getDailyDiscounts() {
         return dailyDiscounts;
     }
 }
