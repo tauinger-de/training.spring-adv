@@ -1,5 +1,6 @@
 package com.example.pizza.customer;
 
+import com.example.pizza.order.OrderRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,9 @@ public class CustomerServiceTest {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private OrderRepository orderRepository;
+
     private Customer someCustomer;
 
     /**
@@ -22,6 +26,7 @@ public class CustomerServiceTest {
      */
     @BeforeEach
     public void setup() {
+        orderRepository.deleteAll();
         customerRepository.deleteAll();
         this.someCustomer = new Customer(
                 "C. S. Test",
