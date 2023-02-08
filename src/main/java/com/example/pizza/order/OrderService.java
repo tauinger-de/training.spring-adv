@@ -93,7 +93,7 @@ public class OrderService {
 
         // discounts
         String nameOfDayOfWeek = LocalDate.now().getDayOfWeek().name();
-        Double discountRate = this.dailyDiscounts.getOrDefault(nameOfDayOfWeek, 0.0);
+        Number discountRate = this.dailyDiscounts.getOrDefault(nameOfDayOfWeek, 0.0);
         Double discountedTotalPrice = totalPrice * (1.0 - discountRate.doubleValue() / 100.0);
         LOG.debug("Reducing price of order from {} to {} due to today's discount of {}%", totalPrice, discountedTotalPrice, discountRate);
 
