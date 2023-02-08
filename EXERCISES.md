@@ -1,37 +1,4 @@
-# Übungen zum aktuellen Kapitel "100 - Profile, Logging und Monitoring"
-
-### a) "Nur Customer” Profil
-
-Markieren Sie alle relevanten Beans mit `@Profile` Annotationen, sodass bei Aufruf 
-der Anwendung mit dem Profil "customer" nur die Funktionalität des Customer-Moduls 
-zur Verfügung steht.
-
-Gerne können Sie auch die Übung so weit treiben, dass die folgenden Profile zur Auswahl 
-stehen und die Anwendung bei jedem der Profile lauffähig ist:
-* "product"
-* "customer"
-* "order"
-* kein Profil gesetzt
-
-### b) “Dev” Profil
-
-Legen Sie eine Konfigurationsdatei für das Profil "dev" an, bei dem vermehrt 
-Logging Ausgaben generiert werden, z.B. Logging-Level aller "pizza" Klassen auf DEBUG.
-
-### c) System.out durch Logging
-
-Ersetzen Sie Ausgaben in der Anwendung, die bisher per System.out.println() erfolgt sind, 
-durch Logging Ausgaben.
-
-### d) Monitoring aktivieren
-
-Aktivieren Sie Monitoring für die Anwendung, sodass folgende Endpunkte im Browser abrufbar sind:
-* health
-* info
-* env
-
-
-## Übungen zum nächsten Kapitel "110 - AOP"
+## Übungen zum aktuellen Kapitel "110 - AOP"
 
 ### a) Logging Aspect
 
@@ -64,15 +31,17 @@ Bonus: Wie kann erreicht werden, dass nicht der Logger des Aspects, sondern der 
 der Klasse genommen wird, in dem die mit `@LogExecutionTime` annotierte Methode enthalten ist?
 
 
-## 120 - RESTful Advanced (Fehler-Handling)
+## Übungen zum nächsten Kapitel "120 - RESTful Advanced"
 
-### a) Exception DTO
+### Error Handling
+
+#### a) Exception DTO
 
 Erstellen Sie eine Klasse `com.example.pizza.error.ExceptionDto`, mittels derer 
 Fehlerinformationen (wie z.B. der HTTP Status Code, Fehlertext, Fehlertyp) 
 ausgeliefert werden können.
 
-### b) Optional: Fehlerantwort prüfen
+#### b) Optional: Fehlerantwort prüfen
 
 Erstellen Sie einen Test, der für einen fehlerhaften REST-Aufruf prüft, dass eine 
 Fehlerantwort auf Basis des Exception-DTO Objekts gesendet wird. Diese Prüfung kann 
@@ -80,20 +49,19 @@ z.B. mittels JsonPath erfolgen.
 
 Erst nach Bearbeitung der folgenden zwei Übungen wird dieser Test erfolgreich durchlaufen
 
-### c) Überarbeitung Exceptions
+#### c) Überarbeitung Exceptions
 
 Überarbeiten Sie die vorhandenen Exception-Klassen der Geschäftslogik, sodass diese 
 eine Basisklasse nutzen, in der ein HTTP Status Code hinterlegt werden kann.
 
-### d) Fehler-Handling implementieren
+#### d) Fehler-Handling implementieren
 
 Implementieren Sie per `@ControllerAdvice` ein generisches Fehler-Handling auf 
 Basis der neuen Basisklasse und des Exception-DTOs.
 
+### Model-Konvertierung
 
-## 120 - RESTful Advanced (Model-Konvertierung)
-
-### e) Test-Driven-Development zur verbesserten Kundenanlage
+#### e) Test-Driven-Development zur verbesserten Kundenanlage
 
 Erstellen Sie einen Test, der prüft, dass trotz Angabe eines "orderCounts" dieser bei 
 neu angelegten Kunden immer 0 beträgt.
@@ -103,19 +71,37 @@ somit vordefiniert werden kann.
 
 Dieser Test wird erst dann erfolgreich sein, wenn die folgenden drei Übungen bearbeitet wurden.
 
-### f) CustomerInDto
+#### f) OrderRequestData
 
-Erstellen Sie eine `CustomerInDto` Klasse, welche genutzt werden soll, um beim 
+Erstellen Sie eine `OrderRequestData` Klasse, welche genutzt werden soll, um beim 
 Anlegen eines neuen Kunden nur bestimmte Attribute zuzulassen. 
 
-### g) Customer-Converter
+#### g) Customer-Converter
 
-Erstellen Sie eine Converter Implementierung, die aus einer `CustomerInDto` 
+Erstellen Sie eine Converter Implementierung, die aus einer `OrderRequestData` 
 Instanz eine `Customer` Instanz macht.
 
-### h) ConversionService nutzen
+#### h) ConversionService nutzen
 
 Nutzen Sie den `ConversionService` im `CustomerRestController`, um ein empfangenes 
-`CustomerInDto` in einen `Customer` zu konvertieren und mit diesem dann die 
+`OrderRequestData` in einen `Customer` zu konvertieren und mit diesem dann die 
 Geschäftslogik aufzurufen.
 
+### OpenAPI
+
+Fügen Sie die openapi Dependency der POM hinzu.
+
+Ergänzen Sie den OrderRestController und zumindest die ExceptionDto Klasse um Annotationen, die die Dokumentation
+lesbarer machen.
+
+### TDD MessageConverter
+
+Schreiben Sie einen Testfall, der ein Upload eines CSV Strings mittels `PUT /products` und MediaType "text/csv"
+prüft. Als Ergebnis sollen alle Produkte durch die hochgeladenen Daten ersetzt worden sein.
+
+Schreiben Sie nun die notwendige `AbstractHttpMessageConverter` Klasse.
+
+Registrieren Sie diese in einer neuen `WebMvcConfigurer` Configuration-Bean.
+
+Ergänzen Sie den `ProductRestController` um eine `uploadProducts()` Methode -- sowie den `ProductService` um die
+dafür notwendige Geschäftslogik-Methode.
