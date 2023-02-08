@@ -45,7 +45,7 @@ public class CustomerRestController {
     //
 
     @GetMapping(GET_ONE_ENDPOINT)
-    public Customer getCustomer(@PathVariable long id) {
+    public Customer getCustomer(@PathVariable long id) throws CustomerNotFoundException {
         return this.customerService.getCustomer(id);
     }
 
@@ -57,9 +57,9 @@ public class CustomerRestController {
 
     @PostMapping(CREATE_ENDPOINT)
     @ResponseStatus(HttpStatus.CREATED)
-    public Customer createCustomer(@RequestBody CustomerInDto customerInDto) {
+    public Customer createCustomer(@RequestBody CreateCustomerRequestData createCustomerRequestData) {
         return this.customerService.createCustomer(
-                this.conversionService.convert(customerInDto, Customer.class)
+                this.conversionService.convert(createCustomerRequestData, Customer.class)
         );
     }
 

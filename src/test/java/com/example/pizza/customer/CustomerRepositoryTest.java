@@ -1,22 +1,33 @@
 package com.example.pizza.customer;
 
+import com.example.pizza.xtras.StringToDoubleMapConverter;
 import org.assertj.core.api.Assertions;
 import org.h2.tools.Server;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.context.annotation.Import;
 
 import java.sql.SQLException;
 
-@SpringBootTest
-@TestPropertySource(properties = {"spring.datasource.url = jdbc:h2:mem:testing"})
+@DataJpaTest(
+        properties = {"spring.datasource.url=jdbc:h2:mem:testing"},
+        showSql = false
+)
+// include converter which is not scanned by default when using @DataJpaTest
+@Import(StringToDoubleMapConverter.class)
+// otherwise connection string is ignored:
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class CustomerRepositoryTest {
 
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private TestEntityManager testEntityManager;
 
     @BeforeAll
     public static void initTest() throws SQLException {
@@ -26,38 +37,40 @@ public class CustomerRepositoryTest {
 
     @Test
     void queryCustomersByPhoneNumberPrefix() {
+        // THIS DOESN'T WORK ANYMORE - @DataJpaTest is @transactional -- nothing is written!
+
         // if you want to access the h2 web console:
         // - set a THREAD-ONLY breakpoint anywhere below this line
         // - access the h2 console at http://localhost:8082 using the DB-URL configured at class level (default username and pwd)
 
         // given
-        customerRepository.save(new Customer("A", null, "222 333"));
-        customerRepository.save(new Customer("B", null, "222333"));
-        customerRepository.save(new Customer("C", null, "23"));
+        testEntityManager.persist(new Customer("A", null, "222 333"));
+        testEntityManager.persist(new Customer("B", null, "222333"));
+        testEntityManager.persist(new Customer("C", null, "23"));
 
         // when #1 -- query including whitespace
-        var customers = customerRepository.queryCustomersByPhoneNumberPrefix("222 ");
+        var customers1 = customerRepository.queryCustomersByPhoneNumberPrefix("222 ");
 
         // then #1
-        Assertions.assertThat(customers).hasSize(1);
+        Assertions.assertThat(customers1).hasSize(1);
 
         // when #2 -- query just triple 2
-        customers = customerRepository.queryCustomersByPhoneNumberPrefix("222");
+        var customers2 = customerRepository.queryCustomersByPhoneNumberPrefix("222");
 
         // then #2
-        Assertions.assertThat(customers).hasSize(2);
+        Assertions.assertThat(customers2).hasSize(2);
 
         // when #3 -- query just single 2
-        customers = customerRepository.queryCustomersByPhoneNumberPrefix("2");
+        var customers3 = customerRepository.queryCustomersByPhoneNumberPrefix("2");
 
         // then #3
-        Assertions.assertThat(customers).hasSize(3);
+        Assertions.assertThat(customers3).hasSize(3);
 
         // when #4 -- query a single 3
-        customers = customerRepository.queryCustomersByPhoneNumberPrefix("3");
+        var customers4 = customerRepository.queryCustomersByPhoneNumberPrefix("3");
 
         // then #3
-        Assertions.assertThat(customers).hasSize(0);
+        Assertions.assertThat(customers4).hasSize(0);
     }
 
 
