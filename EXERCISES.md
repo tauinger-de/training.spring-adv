@@ -1,54 +1,31 @@
-# Übung zu Kapitel "080 - RESTful API"
+# Übung zu Kapitel "100 - Profile, Logging und Monitoring"
 
-## a) Insomnia Rest Client
+### a) "Nur Customer” Profil
 
-Bei Bedarf können Sie den "Insomnia Core" Rest Client installieren: https://insomnia.rest/
+Markieren Sie alle relevanten Beans mit `@Profile` Annotationen, sodass bei Aufruf 
+der Anwendung mit dem Profil "customer" nur die Funktionalität des Customer-Moduls 
+zur Verfügung steht.
 
-Im Branch 080 ist ein exportierter Insomnia Workspace vorhanden, den Sie in das Tool importieren können. 
-Oder Sie legen die wenigen Requests selbst an.
+Gerne können Sie auch die Übung so weit treiben, dass die folgenden Profile zur Auswahl 
+stehen und die Anwendung bei jedem der Profile lauffähig ist:
+* "product"
+* "customer"
+* "order"
+* kein Profil gesetzt
 
-Alternativ können Sie zum Testen der Endpunkte natürlich auch Postman oder den 
-Kommandozeilenbefehl curl nehmen.
+### b) “Dev” Profil
 
-## b) pom.xml erweitern
+Legen Sie eine Konfigurationsdatei für das Profil "dev" an, bei dem vermehrt 
+Logging Ausgaben generiert werden, z.B. Logging-Level aller "pizza" Klassen auf DEBUG.
 
-Fügen Sie den notwendigen Starter der `pom.xml` hinzu
+### c) System.out durch Logging
 
-## c) OrderRestController
+Ersetzen Sie Ausgaben in der Anwendung, die bisher per System.out.println() erfolgt sind, 
+durch Logging Ausgaben.
 
-Erstellen Sie einen API-Endpunkt `/orders/greeting` der für ein GET 
-eine Begrüßung als String zurückgibt.
+### d) Monitoring aktivieren
 
-Testen Sie die URL in Ihrem Browser: http://localhost:8080/orders/greeting
-
-## d) CustomerRestController
-
-Erstellen Sie die folgenden API-Endpunkte:
-
-* `GET /customers`, der alle Kunden zurückgibt
-* `POST /customers`, der einen neuen Kunden anlegt
-
-## e) ProductRestController
-
-Erstellen Sie die folgenden API-Endpunkte:
-
-* `GET /products`, der alle Produkte zurückgibt
-
-## f) Erweiterung OrderRestController
-
-Erstellen Sie zusätzlich die folgenden API-Endpunkte:
-
-* `GET /orders`, der alle Bestellungen zurückgibt
-* `POST /orders`, durch den eine neue Bestellung aufgegeben werden kann. Die Bestellung ist durch 
-folgenden JSON Inhalt definiert:
-````json
-{
-    "phoneNumber": "123-4567",
-    "itemQuantities": {
-        "S-02": 1,
-        "P-10": 2,
-        "P-12": 1
-    }
-}
-````
-
+Aktivieren Sie Monitoring für die Anwendung, sodass folgende Endpunkte im Browser abrufbar sind:
+* health
+* info
+* env
