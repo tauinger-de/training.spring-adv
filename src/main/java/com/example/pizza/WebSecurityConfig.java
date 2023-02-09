@@ -5,7 +5,6 @@ import com.example.pizza.auth.WhoAmIController;
 import com.example.pizza.order.OrderRestController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,12 +20,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // @formatter:off
         http.authorizeRequests()
                 .antMatchers(GET, OrderRestController.GREETING_ENDPOINT).hasAuthority("gast")
-                .antMatchers(GET, OrderRestController.GREETING_ENDPOINT).hasRole("USER")
+                .antMatchers(GET, OrderRestController.GREETING_ENDPOINT).hasAuthority("ROLE_USER")
                 .antMatchers(GET, WhoAmIController.ME_ENDPOINT).authenticated()
                 .antMatchers("/**").denyAll()
-            .and().httpBasic()
-            .and().formLogin()
-            .and().csrf().disable(); // only for testing
+            .and()
+                .httpBasic()
+            .and()
+                .formLogin()
+            .and()
+                .csrf().disable(); // only for testing
         // @formatter:on
     }
 
