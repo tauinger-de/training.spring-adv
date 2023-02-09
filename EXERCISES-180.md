@@ -27,3 +27,8 @@ Denken Sie daran, dass das vom `UserDetailsService` ausgelieferte `UserDetails` 
 enthalten muss! Für bcrypt kann hier eines generiert werden: https://bcrypt-generator.com/
 
 Testen Sie den Endpunkt mit BasicAuth über z.B. Insomnia.
+
+### d) Oauth2
+
+Ergänzen Sie die Anwendung um die `spring-boot-starter-oauth2-resource-server` Dependency.
+
