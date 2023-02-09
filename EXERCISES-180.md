@@ -2,7 +2,7 @@
 
 ### a) pom.xml
 
-Fügen Sie die Abhängigkeit für "spring-integration-file" der `pom.xml` hinzu
+Fügen Sie die Abhängigkeit für "spring-boot-starter-security" der `pom.xml` hinzu
 
 ### b) Neustart - nichts geht mehr
 
