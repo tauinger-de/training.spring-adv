@@ -9,12 +9,16 @@ Fügen Sie die Abhängigkeit für "spring-integration-file" der `pom.xml` hinzu
 Wenn Sie jetzt die Anwendung neu starten und auf einen Endpunkt zugreifen so werden Sie
 überall den Status **401 Unauthorized** erhalten.
 
+Jedoch legt Spring auch in der Default-Konfiguration einen User an, mit dem Sie sich
+anmelden können (z.B. mit Basic-Auth). Der Benutzername ist "user" - das Kennwort wird
+generiert und im Log ausgegeben.
+
 ### c) eigene Security-Config
 
-Erstellen Sie eine eigene Security-Configuration, die alle Requests verbietet - bis auf ein GET auf den 
-Endpunkt `/orders/greeting`. 
+Erstellen Sie eine eigene Security-Configuration, die alle Requests verbietet - bis auf ein GET auf den
+Endpunkt `/orders/greeting`.
 
-Dieser soll für einen Benutzer mit Authority "gast" oder mit Rolle "USER" erlaubt sein. 
+Dieser soll für einen Benutzer mit Authority "gast" oder mit Rolle "USER" erlaubt sein.
 
 Benutzer sollen sich mit Basic-Auth anmelden können.
 
