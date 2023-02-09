@@ -37,11 +37,6 @@ public class ResourceServerSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
-        return new MyUserDetailsService();
-    }
-
-    @Bean
     public JwtDecoder jwtDecoder() {
         var symmetricKeyBytes = symmetricKey.getBytes();
         SecretKey key = new SecretKeySpec(symmetricKeyBytes, 0, symmetricKeyBytes.length, "AES");
