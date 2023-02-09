@@ -9,13 +9,19 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 import static org.springframework.http.HttpMethod.GET;
 
 @EnableWebSecurity
 public class ResourceServerSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    // generated via https://dinochiesa.github.io/jwt/
+    private final String symmetricKey = "Undoubtedly-Daring-Orbit-6888-40";
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -36,7 +42,9 @@ public class ResourceServerSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    PasswordEncoder getPasswordEncoder() {
-        return new BCryptPasswordEncoder();
+    public JwtDecoder jwtDecoder() {
+        var symmetricKeyBytes = symmetricKey.getBytes();
+        SecretKey key = new SecretKeySpec(symmetricKeyBytes, 0, symmetricKeyBytes.length, "AES");
+        return NimbusJwtDecoder.withSecretKey(key).build();
     }
 }
