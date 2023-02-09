@@ -14,13 +14,6 @@ import org.springframework.stereotype.Component;
 public class LoggingAspect {
 
     //
-    // constants
-    //
-
-    private static final Logger LOG = LoggerFactory.getLogger(LoggingAspect.class);
-
-
-    //
     // aop advices
     //
 
