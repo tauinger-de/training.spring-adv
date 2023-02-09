@@ -1,6 +1,5 @@
 package com.example.pizza.product;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
@@ -18,6 +17,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// todo reactive webmvctest
 //@WebMvcTest(ProductRestController.class)
 //@ContextConfiguration(classes = {ProductService.class})
 //@TestPropertySource(properties = {"logging.level.org.springframework.web.filter.CommonsRequestLoggingFilter=DEBUG"})
@@ -59,8 +59,10 @@ public class ProductRestControllerTest {
         var dataList = productListCaptor.getValue();
         assertThat(dataList).hasSize(1);
 
-        Assertions.assertThat(dataList.get(0).getProductId()).isEqualTo("ABC-123");
-        Assertions.assertThat(dataList.get(0).getName()).isEqualTo("Coca Cola");
-        Assertions.assertThat(dataList.get(0).getPrice()).isEqualTo(1.99);
+        ProductAssertions.assertProduct(dataList.get(0)).hasProductId("ABC-123");
+        assertThat(dataList.get(0).getName()).isEqualTo("Coca Cola");
+        assertThat(dataList.get(0).getPrice()).isEqualTo(1.99);
+        assertThat(dataList.get(0)).hasFieldOrPropertyWithValue("productId", "ABC-123");
     }
+
 }
