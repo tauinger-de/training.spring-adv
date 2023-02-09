@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -27,6 +28,7 @@ import java.util.Map;
 
 @Configuration
 @EnableIntegration
+@ConditionalOnProperty(name="app.integration.enabled", havingValue = "true", matchIfMissing = true)
 public class FileIntegrationConfig {
 
     //
@@ -76,17 +78,6 @@ public class FileIntegrationConfig {
             }
         };
     }
-
-
-    // this fixes the problem that the application won't start anymore after adding spring-integration libraries since
-    // a second ConversionService instance is added by those. the solution is to make the MVC one a 'primary' bean, which
-    // is used in case of ambiguity
-    @Bean
-    @Primary
-    public ConversionService primaryConversionService(@Qualifier("mvcConversionService") ConversionService conversionService) {
-        return conversionService;
-    }
-
 
     public static class OrderFileRequest {
         public String phoneNumber;

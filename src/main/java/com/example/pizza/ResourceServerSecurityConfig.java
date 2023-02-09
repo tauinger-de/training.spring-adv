@@ -7,14 +7,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.springframework.http.HttpMethod.GET;
 
-//@EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableWebSecurity
+public class ResourceServerSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -24,9 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(GET, OrderRestController.GREETING_ENDPOINT).hasRole("USER")
                 .antMatchers(GET, WhoAmIController.ME_ENDPOINT).authenticated()
                 .antMatchers("/**").denyAll()
-            .and().httpBasic()
-            .and().formLogin()
-            .and().csrf().disable(); // only for testing
+            .and().oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+            .csrf().disable(); // only for testing
         // @formatter:on
     }
 
