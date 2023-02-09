@@ -3,15 +3,16 @@ package com.example.pizza.error;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.http.HttpStatus;
 
+@SuppressWarnings("unused")
 public class ExceptionDto {
 
     @Schema(example = "NOT_FOUND")
     final HttpStatus status;
 
-    @Schema(example = "CustomerNotFoundException")
+    @Schema(example = "XxxxxxNotFoundException")
     final String type;
 
-    @Schema(example = "For phoneNumber `123-456`")
+    @Schema(example = "For <attribute-name> `<attribute-value>`")
     final String message;
 
     public ExceptionDto(HttpStatus status, String type, String message) {
